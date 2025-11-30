@@ -1,0 +1,110 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
+
+interface LiquidBackgroundProps {
+  scrollProgress: number; // 0が満タン、1が空
+}
+
+export default function LiquidBackground({ scrollProgress }: LiquidBackgroundProps) {
+  const svgRef = useRef<SVGSVGElement>(null);
+  
+  // 【重要】 最新のprogressを保持するためのRef
+  // これにより、アニメーションループをリセットせずに水位だけを変更できます
+  const progressRef = useRef(scrollProgress);
+
+  // propsが変わったらRefを同期
+  useEffect(() => {
+    progressRef.current = scrollProgress;
+  }, [scrollProgress]);
+
+  useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+
+    const paths = svg.querySelectorAll('path');
+    let animationId: number;
+    let time = 0;
+
+    // 波の設定：[速さ, 高さ(振幅), 周波数, 位相ズレ]
+    const layers = [
+      { speed: 0.002, amp: 5, freq: 0.015, offset: 0 },   // 奥
+      { speed: 0.003, amp: 7, freq: 0.025, offset: 2 },   // 中
+      { speed: 0.004, amp: 4, freq: 0.03, offset: 4 },    // 手前
+    ];
+
+    const animate = () => {
+      time += 1;
+      
+      // Refから最新の進捗を取得
+      const currentProgress = progressRef.current;
+
+      // 水位の計算
+      // 0 (満タン) -> 15
+      // 1 (空) -> 110 (画面外)
+      const baseY = 15 + (currentProgress * 105);
+      
+      paths.forEach((path, layerIndex) => {
+        const layer = layers[layerIndex % layers.length]; 
+        const points = [];
+        const segments = 40; 
+        
+        for (let i = 0; i <= segments; i++) {
+          const x = (i / segments) * 100;
+          
+          // ノイズのような動きを作るための波の合成
+          const y1 = Math.sin(time * layer.speed + x * layer.freq + layer.offset);
+          const y2 = Math.sin(time * layer.speed * 1.5 + x * layer.freq * 2.5) * 0.3;
+          
+          // 進捗に合わせて波を少し穏やかにする（液体が減る演出）
+          const dampener = Math.max(0.2, 1 - (currentProgress * 0.8));
+          const waveY = (y1 + y2) * layer.amp * dampener;
+          
+          points.push([x, baseY + waveY]);
+        }
+
+        const pathData = [
+          `M 0,100`, 
+          `L 0,${points[0][1]}`, 
+          ...points.map(p => `L ${p[0]},${p[1]}`), 
+          `L 100,${points[points.length - 1][1]}`, 
+          `L 100,100`, 
+          `Z`
+        ].join(' ');
+
+        path.setAttribute('d', pathData);
+      });
+      
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+    
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, []); // 依存配列は空（マウント時のみ起動）
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <svg
+        ref={svgRef}
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 100"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="coffeeDeep" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#4e342e" /> {/* 表面: 明るめ */}
+            <stop offset="100%" stopColor="#251610" /> {/* 深層: 濃い色 */}
+          </linearGradient>
+        </defs>
+        
+        <path fill="url(#coffeeDeep)" opacity="0.6" />
+        <path fill="url(#coffeeDeep)" opacity="0.8" />
+        <path fill="url(#coffeeDeep)" opacity="1.0" />
+      </svg>
+    </div>
+  );
+}
