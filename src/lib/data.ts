@@ -61,27 +61,33 @@ const data = {
     activities: [
       {
         id: '1',
-        title: 'Next.js × TypeScript Project',
+        title: 'Data Analysis Competition Participation',
         thumbnail: '/images/placeholder-1.jpg',
-        description: 'Practical modern web application development. Building SPAs using App Router.',
+        description: 'Working on data analysis competitions utilizing the latest research models.',
       },
       {
         id: '2',
-        title: 'UI/UX Design Research',
+        title: 'Game AI Development & Experimentation',
         thumbnail: '/images/placeholder-2.jpg',
-        description: 'Learning user-centered design principles and researching interfaces that balance accessibility and usability.',
+        description: 'Learning algorithms and history of strategy games along with reinforcement learning, and implementing game AI.',
       },
       {
         id: '3',
-        title: 'Open Source Contributions',
+        title: 'Generative Art-Based Work Creation',
         thumbnail: '/images/placeholder-3.jpg',
-        description: 'Improving code review and collaboration skills through community contributions.',
+        description: 'Creating works for exhibition with themes of religion, AI, and 2025.',
       },
       {
         id: '4',
-        title: 'Technical Blog Writing',
+        title: 'Event Platform New Business Launch',
         thumbnail: '/images/placeholder-4.jpg',
-        description: 'Outputting learned content and sharing knowledge with others on the same path.',
+        description: 'Developing an event platform and preparing for entrepreneurship together with like-minded friends.',
+      },
+      {
+        id: '5',
+        title: 'Blog Writing',
+        thumbnail: '/images/placeholder-4.jpg',
+        description: 'Outputting learned content and personal action philosophy, sharing knowledge with people on the same path.',
       },
     ],
     achievements: {
@@ -164,22 +170,21 @@ Key achievements included successfully adapting general-purpose image captioning
       },
       {
         id: '4',
-        title: 'Reinforcement Learning × Game: Agent Creation',
-        description: 'Conducted an experiment to create game agents using reinforcement learning and train them to learn optimal actions.',
+        title: 'HR Data Analysis Using Machine Learning Models',
+        description: 'Conducted EDA and model building from CSV files, proposing measures to improve employee turnover rates.',
         url: 'https://example.com',
-        technologies: ['Python', 'PyTorch', 'Gymnasium', 'Stable-Baselines3', 'NumPy'],
+        technologies: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'LightGBM', 'Google Colab'],
         features: [
-          'RL agent implementation',
-          'Environment setup and configuration',
-          'Policy optimization',
-          'Reward function design',
-          'Training and evaluation',
+          'EDA (Exploratory Data Analysis)',
+          'Model building',
+          'Proposal of measures to improve turnover rates',
+          'Execution on Google Colab',
         ],
-        longDescription: `This project involved creating intelligent game agents using reinforcement learning techniques. The goal was to train agents that could learn optimal strategies through interaction with game environments, demonstrating the power of RL in solving complex decision-making problems.
+        longDescription: `This project involved conducting EDA and model building from CSV files, proposing measures to improve employee turnover rates.
 
-The implementation involved setting up game environments using Gymnasium, implementing various RL algorithms such as PPO and DQN, and training agents to achieve high performance. The project explored different reward functions and training strategies to optimize agent behavior.
+Key achievements included performing EDA, building models, and proposing measures to improve turnover rates.
 
-Key outcomes included successfully training agents that could outperform baseline strategies, understanding the trade-offs between different RL algorithms, and gaining practical experience in implementing and tuning reinforcement learning systems. The project provided valuable insights into the challenges and opportunities in applying RL to game environments.`,
+The project was executed on Google Colab.`,
       },
     ],
     blogPosts: [
@@ -292,27 +297,33 @@ Key outcomes included successfully training agents that could outperform baselin
     activities: [
       {
         id: '1',
-        title: 'Next.js × TypeScript プロジェクト',
+        title: 'データ分析コンペティション参加',
         thumbnail: '/images/placeholder-1.jpg',
-        description: 'モダンなWebアプリケーション開発の実践。App Routerを活用したSPAの構築に取り組んでいます。',
+        description: '最新の論文のモデルを活用してデータ分析コンペティションに取り組んでいます。',
       },
       {
         id: '2',
-        title: 'UI/UXデザイン研究',
+        title: 'ゲームAI開発・実験',
         thumbnail: '/images/placeholder-2.jpg',
-        description: 'ユーザー中心設計の原則を学び、アクセシビリティと使いやすさを両立したインターフェースの設計を研究しています。',
+        description: '戦略ゲームについてのアルゴリズムや歴史と強化学習を学び、ゲームAIを実装しています。',
       },
       {
         id: '3',
-        title: 'オープンソース貢献',
+        title: 'ジェネラティブアートを利用した作品製作',
         thumbnail: '/images/placeholder-3.jpg',
-        description: 'コミュニティへの貢献を通じて、コードレビューやコラボレーションのスキルを向上させています。',
+        description: '宗教,AI,2025年をテーマに、展示会に出展する作品の製作に取り組んでいます。',
       },
       {
         id: '4',
-        title: '技術ブログ執筆',
+        title: 'イベントプラットフォーム新規事業の立ち上げ',
         thumbnail: '/images/placeholder-4.jpg',
-        description: '学習した内容をアウトプットし、同じ道を歩む人々と知識を共有しています。',
+        description: '同じ志を持った友人と共に、イベントプラットフォームの開発および起業準備を行っています。',
+      },
+      {
+        id: '5',
+        title: 'ブログ執筆',
+        thumbnail: '/images/placeholder-4.jpg',
+        description: '学習した内容,自分の中の行動哲学をアウトプットし、同じ道を歩む人々と知識を共有しています。',
       },
     ],
     achievements: {
@@ -395,22 +406,21 @@ Key outcomes included successfully training agents that could outperform baselin
       },
       {
         id: '4',
-        title: '強化学習×ゲームでエージェントを作成',
-        description: '強化学習を用いて、ゲーム内のエージェントを作成し、最適な行動を学習させる実験を行いました。',
+        title: '機械学習モデルを用いた人事データ分析',
+        description: 'csvファイルからEDA/モデル構築を行い、離職率改善の施策提案までを行いました。',
         url: 'https://example.com',
-        technologies: ['Python', 'PyTorch', 'Gymnasium', 'Stable-Baselines3', 'NumPy'],
+        technologies: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'LightGBM','Google Colab'],
         features: [
-          'RLエージェントの実装',
-          '環境のセットアップと設定',
-          'ポリシー最適化',
-          '報酬関数の設計',
-          '訓練と評価',
+          'EDA',
+          'モデル構築',
+          '離職率改善の施策提案',
+          'Google Colabでの実行',
         ],
-        longDescription: `このプロジェクトは、強化学習技術を使用してインテリジェントなゲームエージェントを作成することを含みました。目標は、ゲーム環境との相互作用を通じて最適な戦略を学習できるエージェントを訓練し、複雑な意思決定問題を解決する際のRLの力を実証することでした。
+        longDescription: `このプロジェクトは、csvファイルからEDA/モデル構築を行い、離職率改善の施策提案までを行いました。
 
-実装には、Gymnasiumを使用したゲーム環境のセットアップ、PPOやDQNなどの様々なRLアルゴリズムの実装、そして高性能を達成するためのエージェントの訓練が含まれました。このプロジェクトは、異なる報酬関数と訓練戦略を探索してエージェントの行動を最適化しました。
+主な成果には、EDAを行い、モデル構築を行い、離職率改善の施策提案までを行いました。
 
-主な成果には、ベースライン戦略を上回るエージェントの訓練に成功し、異なるRLアルゴリズム間のトレードオフを理解し、強化学習システムの実装と調整における実践的な経験を得ることが含まれます。このプロジェクトは、ゲーム環境にRLを適用する際の課題と機会についての貴重な洞察を提供しました。`,
+Google Colabでの実行を行いました。`,
       },
     ],
     blogPosts: [
