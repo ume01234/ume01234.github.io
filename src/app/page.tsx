@@ -440,7 +440,7 @@ export default function Home() {
                   </span>
                 </Link> */}
               </div>
-              {data.blogPosts && data.blogPosts.length > 0 ? (
+              {false ? (
                 <div className="overflow-x-auto no-scrollbar pb-8">
                   <div className="flex gap-6 min-w-max px-4">
                     {(data.blogPosts as Array<{ id: string; title: string; subtitle: string; url: string; date: string; platform?: string }>).slice(0, 5).map((post, index) => (
