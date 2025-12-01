@@ -425,8 +425,11 @@ The project demonstrates advanced 3D web development techniques, including custo
   },
 };
 
-// GitHubリポジトリURL（実際のリポジトリURLに変更してください）
-export const repositoryUrl = 'https://github.com/yourusername/portfolio-site';
+// メールアドレス
+export const emailAddress = 'zume2.dev@gmail.com';
+
+// GitHubリポジトリURL
+export const repositoryUrl = 'https://github.com/ume01234/portfolio-site';
 
 export const socialLinks: SocialLink[] = [
   {

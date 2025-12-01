@@ -3,11 +3,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Github, Linkedin, Twitter, BookOpen, FileText, PenTool, Newspaper, Mail } from 'lucide-react';
+import { Github, Linkedin, BookOpen, FileText, PenTool, Newspaper, Mail } from 'lucide-react';
 import {
   getData,
   socialLinks,
   repositoryUrl,
+  emailAddress,
 } from '@/lib/data';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LiquidBackground from '@/components/LiquidBackground';
@@ -17,7 +18,6 @@ import ScrollToTop from '@/components/ScrollToTop';
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   github: Github,
   linkedin: Linkedin,
-  twitter: Twitter,
   'book-open': BookOpen,
   'file-text': FileText,
   'pen-tool': PenTool,
@@ -136,7 +136,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
-                className="flex gap-4 justify-center"
+                className="flex gap-4 justify-center mb-4"
               >
                 {socialLinks.map((social) => {
                   const Icon = iconMap[social.icon] || Github;
@@ -147,11 +147,27 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-white hover:scale-110 transition-transform"
+                      aria-label={social.name}
                     >
                       <Icon className="w-6 h-6" />
                     </a>
                   );
                 })}
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 1.0 }}
+                className="flex items-center justify-center gap-2 text-white/90 hover:text-white transition-colors"
+              >
+                <Mail className="w-4 h-4" />
+                <a
+                  href={`mailto:${emailAddress}`}
+                  className="text-sm hover:underline"
+                  aria-label="Send email"
+                >
+                  {emailAddress}
+                </a>
               </motion.div>
             </div>
 
@@ -445,14 +461,14 @@ export default function Home() {
             {/* Footer */}
             <footer className="px-6 py-12 border-t border-coffee-brown/10 bg-[#fffdf9]">
               <div className="text-center text-sm space-y-2" style={{ color: '#B0E0E6' }}>
-                <p>© 2024 {data.profileData.name}</p>
+                <p>© {new Date().getFullYear()} {data.profileData.name}</p>
                 <p>
                   <a
-                    href="mailto:zume2.dev@gmail.com"
+                    href={`mailto:${emailAddress}`}
                     className="hover:opacity-80 transition-opacity"
                     aria-label="Send email"
                   >
-                    zume2.dev@gmail.com
+                    {emailAddress}
                   </a>
                 </p>
                 <p>
