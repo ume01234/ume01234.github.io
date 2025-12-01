@@ -2,7 +2,7 @@ import './globals.css';
 import LayoutClient from './layout-client';
 
 export const metadata = {
-  title: 'Portfolio - Coffee & Flow',
+  title: 'portfolio-Hashizume',
   description: '就職活動用ポートフォリオサイト',
 };
 
