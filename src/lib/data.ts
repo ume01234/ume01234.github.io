@@ -36,6 +36,13 @@ export interface SocialLink {
   icon: string;
 }
 
+export interface Hobby {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
 type Language = 'en' | 'ja';
 
 const data = {
@@ -217,6 +224,44 @@ Key outcomes included successfully training agents that could outperform baselin
         platform: 'Zenn',
       },
     ],
+    hobbies: [
+      {
+        id: '1',
+        title: 'Music',
+        description: 'Enjoying live concerts and festivals, and playing electric guitar and piano.',
+        image: '/images/hobbies/music.jpg',
+      },
+      {
+        id: '2',
+        title: 'Sports',
+        description: 'Skiing, tennis, and soccer.',
+        image: '/images/hobbies/sports.jpg',
+      },
+      {
+        id: '3',
+        title: 'Movies',
+        description: 'Favorite films include LEON, The Invisible Guest, and Harry Potter series.',
+        image: '/images/hobbies/movies.jpg',
+      },
+      {
+        id: '4',
+        title: 'Travel',
+        description: 'Exploring new places and cultures.',
+        image: '/images/hobbies/travel.jpg',
+      },
+      {
+        id: '5',
+        title: 'Games',
+        description: 'Enjoying various video games.',
+        image: '/images/hobbies/games.jpg',
+      },
+      {
+        id: '6',
+        title: 'Personal Development',
+        description: 'Personal projects, English learning, and participating in Kaggle competitions.',
+        image: '/images/hobbies/development.jpg',
+      },
+    ],
     sections: {
       aboutMe: 'About Me',
       education: 'Affiliation & Education',
@@ -226,6 +271,7 @@ Key outcomes included successfully training agents that could outperform baselin
       events: 'External Events',
       works: 'Projects',
       blog: 'Blog',
+      hobbies: 'Coffee Break',
       viewAll: 'View All',
       sourceCode: 'Source code is available on',
       back: 'Back',
@@ -409,6 +455,44 @@ Key outcomes included successfully training agents that could outperform baselin
         platform: 'Zenn',
       },
     ],
+    hobbies: [
+      {
+        id: '1',
+        title: '音楽',
+        description: 'ライブやフェスに行くことと、エレキギターやピアノを演奏することが好きです。',
+        image: '/images/hobbies/music.jpg',
+      },
+      {
+        id: '2',
+        title: 'スポーツ',
+        description: 'スキー、テニス、サッカーを楽しんでいます。',
+        image: '/images/hobbies/sports.jpg',
+      },
+      {
+        id: '3',
+        title: '映画',
+        description: 'LEON、インビジブルゲスト、ハリーポッターシリーズなどが好きです。',
+        image: '/images/hobbies/movies.jpg',
+      },
+      {
+        id: '4',
+        title: '旅行',
+        description: '新しい場所や文化を探索することが好きです。',
+        image: '/images/hobbies/travel.jpg',
+      },
+      {
+        id: '5',
+        title: 'ゲーム',
+        description: '様々なビデオゲームを楽しんでいます。',
+        image: '/images/hobbies/games.jpg',
+      },
+      {
+        id: '6',
+        title: '個人開発・学習',
+        description: '個人開発プロジェクト、英語学習、Kaggleへの参加をしています。',
+        image: '/images/hobbies/development.jpg',
+      },
+    ],
     sections: {
       aboutMe: '私について',
       education: '所属・学歴',
@@ -418,6 +502,7 @@ Key outcomes included successfully training agents that could outperform baselin
       events: '外部イベント',
       works: 'プロジェクト',
       blog: 'ブログ',
+      hobbies: 'コーヒーブレイク',
       viewAll: '一覧へ',
       sourceCode: 'ソースコードは',
       back: '戻る',

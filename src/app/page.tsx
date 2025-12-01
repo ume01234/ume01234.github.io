@@ -348,7 +348,44 @@ export default function Home() {
             {/* セクション6: 外部イベント (Type B) */}
             <TypeBSection title={data.sections.events} chunks={eventChunks} />
 
-            {/* セクション7: Works (Netflix風) */}
+            {/* セクション7: 好きなこと (コーヒーブレイク) */}
+            <section className="min-h-[40vh] px-6 py-8 md:py-8 flex flex-col justify-center">
+              <h2 className="text-xl md:text-2xl font-bold mb-8 text-coffee-espresso">
+                {data.sections.hobbies}
+              </h2>
+              <div className="overflow-x-auto no-scrollbar pb-8">
+                <div className="flex gap-6 min-w-max px-4">
+                  {data.hobbies.map((hobby, index) => (
+                    <motion.div
+                      key={hobby.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="w-64 flex-shrink-0 group"
+                    >
+                      <div 
+                        className="aspect-square bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative"
+                        aria-hidden="true"
+                      >
+                        <div className="absolute inset-0 bg-coffee-espresso/0 group-hover:bg-coffee-espresso/10 transition-colors duration-300" />
+                        <div className="w-full h-full flex items-center justify-center text-coffee-brown/40">
+                          {hobby.title}
+                        </div>
+                      </div>
+                      <h3 className="text-lg font-bold text-coffee-espresso mb-2 group-hover:text-coffee-brown transition-colors">
+                        {hobby.title}
+                      </h3>
+                      <p className="text-sm text-coffee-dark/80 leading-relaxed">
+                        {hobby.description}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* セクション8: Works (Netflix風) */}
             <section className="min-h-[40vh] px-6 py-8 md:py-8 flex flex-col justify-center">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-coffee-espresso">
@@ -400,7 +437,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* セクション8: Blog (Netflix風) */}
+            {/* セクション9: Blog (Netflix風) */}
             <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center mb-20">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-xl md:text-2xl font-bold text-coffee-espresso">
