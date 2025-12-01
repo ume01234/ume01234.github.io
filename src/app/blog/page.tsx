@@ -55,7 +55,7 @@ export default function BlogPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block group"
-                  aria-label={`Read article: ${post.title} on ${post.platform || 'blog'}`}
+                  aria-label={language === 'ja' ? `記事を読む: ${post.title}${post.platform ? ` (${post.platform})` : ''}` : `Read article: ${post.title} on ${post.platform || 'blog'}`}
                 >
                   <div className="flex items-start justify-between gap-3 mb-2">
                     <h2 className="text-lg font-semibold text-coffee-espresso group-hover:text-coffee-brown transition-colors flex-1">

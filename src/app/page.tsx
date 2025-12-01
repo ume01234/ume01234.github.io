@@ -164,7 +164,7 @@ export default function Home() {
                 <a
                   href={`mailto:${emailAddress}`}
                   className="text-sm hover:underline"
-                  aria-label="Send email"
+                  aria-label={language === 'ja' ? 'メールを送信' : 'Send email'}
                 >
                   {emailAddress}
                 </a>
@@ -277,16 +277,12 @@ export default function Home() {
                 {data.sections.aboutMe}
               </h2>
               <div className="text-coffee-dark leading-loose whitespace-pre-line text-lg max-w-4xl mx-auto">
-                {data.profileData.aboutMe.split('**「抽出」**').map((part, index, array) => {
-                  if (index === array.length - 1) {
-                    return <span key={index}>{part}</span>;
+                {data.profileData.aboutMe.split(/\*\*(.*?)\*\*/g).map((part, index) => {
+                  // 奇数インデックスは**で囲まれた部分（太字にする）
+                  if (index % 2 === 1) {
+                    return <strong key={index}>{part}</strong>;
                   }
-                  return (
-                    <span key={index}>
-                      {part}
-                      <strong>「抽出」</strong>
-                    </span>
-                  );
+                  return <span key={index}>{part}</span>;
                 })}
               </div>
             </section>
@@ -378,7 +374,7 @@ export default function Home() {
                 </h2>
                 <Link 
                   href="/works"
-                  aria-label={language === 'ja' ? 'すべてのプロジェクトを表示' : 'View all works'}
+                  aria-label={language === 'ja' ? 'すべてのプロジェクトを表示' : 'View all projects'}
                 >
                   <span className="text-coffee-brown hover:text-coffee-espresso transition-colors font-medium border-b border-coffee-brown/30 hover:border-coffee-brown text-sm md:text-base">
                     {data.sections.viewAll} →
@@ -404,10 +400,12 @@ export default function Home() {
                           className="aspect-video bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative"
                           aria-hidden="true"
                         >
-                           <div className="absolute inset-0 bg-coffee-espresso/0 group-hover:bg-coffee-espresso/10 transition-colors duration-300" />
-                           <div className="w-full h-full flex items-center justify-center text-coffee-brown/40">
-                              Work Image
-                           </div>
+                          <img
+                            src={`/images/works/work-${work.id}.png`}
+                            alt={work.title}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-coffee-espresso/0 group-hover:bg-coffee-espresso/10 transition-colors duration-300" />
                         </div>
                         <h3 className="text-xl font-bold text-coffee-espresso mb-2 group-hover:text-coffee-brown transition-colors">
                           {work.title.split('|').map((part, index, array) => (
@@ -442,10 +440,10 @@ export default function Home() {
                   </span>
                 </Link> */}
               </div>
-              {data.blogPosts.length > 0 ? (
+              {data.blogPosts && data.blogPosts.length > 0 ? (
                 <div className="overflow-x-auto no-scrollbar pb-8">
                   <div className="flex gap-6 min-w-max px-4">
-                    {data.blogPosts.slice(0, 5).map((post, index) => (
+                    {(data.blogPosts as Array<{ id: string; title: string; subtitle: string; url: string; date: string; platform?: string }>).slice(0, 5).map((post, index) => (
                       <motion.div
                         key={post.id}
                         initial={{ opacity: 0, x: 20 }}
@@ -482,7 +480,7 @@ export default function Home() {
                   </div>
                 </div>
               ) : (
-                <div className="flex items-center justify-center py-16">
+                <div className="py-16">
                   <p className="text-2xl md:text-3xl font-bold text-coffee-espresso/60">
                     {data.sections.comingSoon}
                   </p>
@@ -495,35 +493,29 @@ export default function Home() {
               <h2 className="text-xl md:text-2xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.hobbies}
               </h2>
-              <div className="overflow-x-auto no-scrollbar pb-8">
-                <div className="flex gap-6 min-w-max px-4">
+              <div>
+                <ul className="space-y-4">
                   {data.hobbies.map((hobby, index) => (
-                    <motion.div
+                    <motion.li
                       key={hobby.id}
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="w-64 flex-shrink-0 group"
+                      className="flex items-start gap-4"
                     >
-                      <div 
-                        className="aspect-square bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative"
-                        aria-hidden="true"
-                      >
-                        <div className="absolute inset-0 bg-coffee-espresso/0 group-hover:bg-coffee-espresso/10 transition-colors duration-300" />
-                        <div className="w-full h-full flex items-center justify-center text-coffee-brown/40">
+                      <span className="text-coffee-brown text-xl font-bold mt-1 flex-shrink-0">•</span>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-bold text-coffee-espresso mb-1">
                           {hobby.title}
-                        </div>
+                        </h3>
+                        <p className="text-sm text-coffee-dark/80 leading-relaxed">
+                          {hobby.description}
+                        </p>
                       </div>
-                      <h3 className="text-lg font-bold text-coffee-espresso mb-2 group-hover:text-coffee-brown transition-colors">
-                        {hobby.title}
-                      </h3>
-                      <p className="text-sm text-coffee-dark/80 leading-relaxed">
-                        {hobby.description}
-                      </p>
-                    </motion.div>
+                    </motion.li>
                   ))}
-                </div>
+                </ul>
               </div>
             </section>
 

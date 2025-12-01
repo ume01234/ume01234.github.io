@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Code, Sparkles } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useEffect } from 'react';
@@ -35,16 +34,15 @@ export default function WorkDetailClient({ workId }: WorkDetailClientProps) {
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-coffee-cream/80 backdrop-blur-sm border-b border-coffee-brown/10">
         <div className="max-w-7xl mx-auto px-6 py-4">
-          <Link href="/works">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 text-coffee-espresso/70 hover:text-coffee-espresso transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              {data.sections.back}
-            </motion.button>
-          </Link>
+          <motion.button
+            onClick={() => router.back()}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 text-coffee-espresso/70 hover:text-coffee-espresso transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            {data.sections.back}
+          </motion.button>
         </div>
       </header>
 
@@ -57,7 +55,7 @@ export default function WorkDetailClient({ workId }: WorkDetailClientProps) {
             transition={{ duration: 0.6 }}
           >
             {/* Title */}
-            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-coffee-espresso">
+            <h1 className="text-3xl md:text-4xl font-bold mb-4 text-coffee-espresso">
               {work.title.split('|').map((part, index, array) => (
                 <span key={index}>
                   {part}
@@ -66,11 +64,13 @@ export default function WorkDetailClient({ workId }: WorkDetailClientProps) {
               ))}
             </h1>
             
-            {/* Hero Image Placeholder */}
-            <div className="w-full h-64 md:h-96 bg-coffee-latte/30 rounded-lg mb-8 flex items-center justify-center border border-coffee-brown/20">
-              <span className="text-coffee-brown/40 text-lg font-serif">
-                {isJapanese ? 'プロジェクト画像' : 'Project Image'}
-              </span>
+            {/* Hero Image */}
+            <div className="w-full h-64 md:h-96 rounded-lg mb-8 overflow-hidden border border-coffee-brown/20">
+              <img
+                src={`/images/works/work-${work.id}.png`}
+                alt={work.title}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Description */}
