@@ -17,7 +17,15 @@ export default function ScrollToTop({ scrollContainerRef }: ScrollToTopProps) {
 
     const handleScroll = () => {
       const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
-      const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
+      const totalScrollHeight = scrollHeight - clientHeight;
+      
+      // スクロールできない場合や計算が無効な場合は非表示
+      if (totalScrollHeight <= 0) {
+        setIsVisible(false);
+        return;
+      }
+      
+      const scrollPercentage = scrollTop / totalScrollHeight;
       
       // 80%以上スクロールしたら表示
       setIsVisible(scrollPercentage > 0.8);

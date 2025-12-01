@@ -44,13 +44,16 @@ const data = {
       name: 'Your Name',
       catchCopy: 'An Engineer Traveling Through the Galaxy',
       vision: 'Creating new worlds through technology',
-      about: `I believe in possibilities as vast as the universe, connecting stars with the language of code.
+      aboutMe: `I am a developer who values the depth and tranquility found in a cup of coffee. Just as coffee requires time and care to brew, I approach technology with patience and attention to detail.
 
-Through my experiences, I have explored a wide range of technical domains from frontend development to backend and infrastructure. I am particularly interested in UI/UX design that enhances user experience and scalable system architecture.
+My philosophy centers on creating meaningful connections between people and technology. I believe that great products emerge from understanding both the technical possibilities and the human needs they serve. Through my work, I strive to bridge the gap between complex systems and intuitive user experiences.
 
-Currently, I am learning the latest web technologies while honing practical skills through personal projects. I actively contribute to team development and open source, valuing connections within the community.
-
-In the future, I aim to create products that enrich people's lives through the fusion of technology and design.`,
+I am passionate about continuous learning and growth, always seeking to expand my knowledge across different domains. Whether it's exploring new frameworks, contributing to open source projects, or collaborating with diverse teams, I find joy in the process of discovery and creation.`,
+      education: [
+        'University of Tsukuba, College of General Studies, Science Group 3 - Enrollment',
+        'University of Tsukuba, School of Informatics, Media Sciences - Transfer',
+        'Digital Nature Group (Yoichi Ochiai Laboratory) - Affiliation',
+      ],
     },
     activities: [
       {
@@ -215,7 +218,8 @@ The project demonstrates advanced 3D web development techniques, including custo
       },
     ],
     sections: {
-      career: 'Career & Education',
+      aboutMe: 'About Me',
+      education: 'Affiliation & Education',
       activities: 'Current Main Activities',
       certifications: 'Certifications',
       internships: 'Internships',
@@ -231,12 +235,16 @@ The project demonstrates advanced 3D web development techniques, including custo
       name: 'Your Name',
       catchCopy: '銀河を旅するエンジニア',
       vision: '技術を通じて、新しい世界を創造する',
-      about: `私は宇宙のように広がる可能性を信じ、コードという言語で星々を結ぶ旅人です。
-  
-  これまでの経験を通じて、フロントエンド開発からバックエンド、インフラまで幅広い技術領域を探索してきました。特に、ユーザー体験を向上させるためのUI/UXデザインと、スケーラブルなシステム設計に興味を持っています。
-  現在は、最新のWeb技術を学びながら、個人プロジェクトを通じて実践的なスキルを磨いています。チーム開発やオープンソースへの貢献も積極的に行っており、コミュニティとのつながりを大切にしています。
-  
-  将来は、テクノロジーとデザインの融合により、人々の生活をより豊かにするプロダクトを創出したいと考えています。`,
+      aboutMe: `私は一杯のコーヒーを味わうように、落ち着きと深みを持って技術と向き合う開発者です。コーヒーが時間と手間をかけて淹れられるように、技術も丁寧に、そして情熱を持って取り組むことが大切だと考えています。
+
+私の哲学は、人と技術の間に意味のあるつながりを作ることです。技術的な可能性と人間のニーズの両方を理解することで、真に価値のあるプロダクトが生まれると信じています。複雑なシステムと直感的なユーザー体験の間の橋渡しをすることが、私の目標です。
+
+継続的な学習と成長に情熱を注いでおり、常に異なる領域への知識の拡張を求めています。新しいフレームワークの探索、オープンソースプロジェクトへの貢献、多様なチームとの協働など、発見と創造のプロセスに喜びを見出しています。`,
+      education: [
+        '筑波大学 総合学域群 理系3　入学',
+        '筑波大学 情報学群メディア創成学類　移行',
+        'Digital Nature Group(落合陽一研究室)　所属',
+      ],
     },
     activities: [
       {
@@ -401,7 +409,8 @@ The project demonstrates advanced 3D web development techniques, including custo
       },
     ],
     sections: {
-      career: '経歴・学歴',
+      aboutMe: '私について',
+      education: '所属・学歴',
       activities: '現在の主な取り組み',
       certifications: '資格',
       internships: 'インターン',

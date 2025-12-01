@@ -22,7 +22,7 @@ export default function WorkDetailClient({ workId }: WorkDetailClientProps) {
     if (!work) {
       router.push('/works');
     }
-  }, [work, router]);
+  }, [workId, work, router]);
 
   if (!work) {
     return null;

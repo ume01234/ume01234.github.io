@@ -231,22 +231,43 @@ export default function Home() {
               </div>
             </section>
 
-            {/* セクション1: 経歴・学歴 */}
-            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center max-w-4xl mx-auto">
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso"
-              >
-                {data.sections.career}
-              </motion.h2>
-              <div className="text-coffee-dark leading-loose whitespace-pre-line text-lg">
-                {data.profileData.about}
+            {/* セクション1: 私について */}
+            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
+                {data.sections.aboutMe}
+              </h2>
+              <div className="text-coffee-dark leading-loose whitespace-pre-line text-lg max-w-4xl mx-auto">
+                {data.profileData.aboutMe}
               </div>
             </section>
 
-            {/* セクション2: 現在の主な取り組み (Netflix風 横スクロール) */}
+            {/* セクション2: 所属・学歴 */}
+            <section className="min-h-[30vh] px-6 py-8 md:py-12 flex flex-col justify-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
+                {data.sections.education}
+              </h2>
+              <div className="overflow-x-auto no-scrollbar pb-8">
+                <div className="flex gap-16 min-w-max px-4">
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="min-w-64 flex-shrink-0"
+                  >
+                    <ul className="space-y-2 border-l-2 border-coffee-brown/20 pl-6">
+                      {data.profileData.education.map((item, index) => (
+                        <li key={index} className="text-coffee-dark font-medium whitespace-nowrap">
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                </div>
+              </div>
+            </section>
+
+            {/* セクション3: 現在の主な取り組み (Netflix風 横スクロール) */}
             <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.activities}
@@ -285,16 +306,16 @@ export default function Home() {
               </div>
             </section>
 
-            {/* セクション3: 資格 (Type B: 5行区切り横スクロール) */}
+            {/* セクション4: 資格 (Type B: 5行区切り横スクロール) */}
             <TypeBSection title={data.sections.certifications} chunks={certChunks} />
 
-            {/* セクション4: インターン (Type B) */}
+            {/* セクション5: インターン (Type B) */}
             <TypeBSection title={data.sections.internships} chunks={internshipChunks} />
 
-            {/* セクション5: 外部イベント (Type B) */}
+            {/* セクション6: 外部イベント (Type B) */}
             <TypeBSection title={data.sections.events} chunks={eventChunks} />
 
-            {/* セクション6: Works (Netflix風) */}
+            {/* セクション7: Works (Netflix風) */}
             <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl md:text-3xl font-bold text-coffee-espresso">
@@ -346,7 +367,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* セクション7: Blog (Netflix風) */}
+            {/* セクション8: Blog (Netflix風) */}
             <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center mb-20">
               <div className="flex items-center justify-between mb-8">
                 <h2 className="text-2xl md:text-3xl font-bold text-coffee-espresso">
