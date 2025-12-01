@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ScrollToTopProps {
   scrollContainerRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function ScrollToTop({ scrollContainerRef }: ScrollToTopProps) {
+  const { language } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default function ScrollToTop({ scrollContainerRef }: ScrollToTopProps) {
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-[70] p-3 bg-coffee-brown/80 hover:bg-coffee-brown backdrop-blur-sm border border-coffee-brown/30 rounded-full shadow-lg hover:shadow-xl transition-all text-coffee-cream hover:scale-110"
-          aria-label="Scroll to top"
+          aria-label={language === 'ja' ? 'ページトップに戻る' : 'Scroll to top'}
         >
           <ArrowUp className="w-5 h-5" />
         </motion.button>

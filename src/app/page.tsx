@@ -147,7 +147,7 @@ export default function Home() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-white hover:scale-110 transition-transform"
-                      aria-label={social.name}
+                      aria-label={`${social.name}${language === 'ja' ? 'を開く' : ''}`}
                     >
                       <Icon className="w-6 h-6" />
                     </a>
@@ -206,7 +206,14 @@ export default function Home() {
                   className="text-4xl font-serif mb-6 font-light drop-shadow-md"
                   style={{ fontFamily: '"Noto Serif JP", serif' }}
                 >
-                  {data.profileData.catchCopy}
+                  {language === 'ja' && data.profileData.catchCopy.includes('、') ? (
+                    <>
+                      {data.profileData.catchCopy.split('、')[0]}、<br />
+                      {data.profileData.catchCopy.split('、')[1]}
+                    </>
+                  ) : (
+                    data.profileData.catchCopy
+                  )}
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
@@ -239,7 +246,7 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white hover:scale-110 transition-transform"
-                        aria-label={social.name}
+                        aria-label={`${social.name}${language === 'ja' ? 'を開く' : ''}`}
                       >
                         <Icon className="w-6 h-6" />
                       </a>
@@ -254,11 +261,11 @@ export default function Home() {
                 >
                   <Mail className="w-4 h-4" />
                   <a
-                    href="mailto:zume2.dev@gmail.com"
+                    href={`mailto:${emailAddress}`}
                     className="text-sm hover:underline"
-                    aria-label="Send email"
+                    aria-label={language === 'ja' ? 'メールを送信' : 'Send email'}
                   >
-                    zume2.dev@gmail.com
+                    {emailAddress}
                   </a>
                 </motion.div>
               </div>
@@ -270,7 +277,17 @@ export default function Home() {
                 {data.sections.aboutMe}
               </h2>
               <div className="text-coffee-dark leading-loose whitespace-pre-line text-lg max-w-4xl mx-auto">
-                {data.profileData.aboutMe}
+                {data.profileData.aboutMe.split('**「抽出」**').map((part, index, array) => {
+                  if (index === array.length - 1) {
+                    return <span key={index}>{part}</span>;
+                  }
+                  return (
+                    <span key={index}>
+                      {part}
+                      <strong>「抽出」</strong>
+                    </span>
+                  );
+                })}
               </div>
             </section>
 
@@ -328,7 +345,12 @@ export default function Home() {
                          </div>
                       </div>
                       <h3 className="text-xl font-bold text-coffee-espresso mb-2 group-hover:text-coffee-brown transition-colors">
-                        {activity.title}
+                        {activity.title.split('|').map((part, index, array) => (
+                          <span key={index}>
+                            {part}
+                            {index < array.length - 1 && <br />}
+                          </span>
+                        ))}
                       </h3>
                       <p className="text-sm text-coffee-dark/80 leading-relaxed">
                         {activity.description}
@@ -356,7 +378,7 @@ export default function Home() {
                 </h2>
                 <Link 
                   href="/works"
-                  aria-label="View all works"
+                  aria-label={language === 'ja' ? 'すべてのプロジェクトを表示' : 'View all works'}
                 >
                   <span className="text-coffee-brown hover:text-coffee-espresso transition-colors font-medium border-b border-coffee-brown/30 hover:border-coffee-brown text-sm md:text-base">
                     {data.sections.viewAll} →
@@ -376,7 +398,7 @@ export default function Home() {
                     >
                       <Link 
                         href={`/works/${work.id}`}
-                        aria-label={`View ${work.title} - ${work.description}`}
+                        aria-label={language === 'ja' ? `${work.title}を表示` : `View ${work.title}`}
                       >
                         <div 
                           className="aspect-video bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative"
@@ -388,7 +410,12 @@ export default function Home() {
                            </div>
                         </div>
                         <h3 className="text-xl font-bold text-coffee-espresso mb-2 group-hover:text-coffee-brown transition-colors">
-                          {work.title}
+                          {work.title.split('|').map((part, index, array) => (
+                            <span key={index}>
+                              {part}
+                              {index < array.length - 1 && <br />}
+                            </span>
+                          ))}
                         </h3>
                         <p className="text-sm text-coffee-dark/80 leading-relaxed">
                           {work.description}
@@ -406,53 +433,61 @@ export default function Home() {
                 <h2 className="text-xl md:text-2xl font-bold text-coffee-espresso">
                   {data.sections.blog}
                 </h2>
-                <Link 
+                {/* <Link 
                   href="/blog"
-                  aria-label="View all blog posts"
+                  aria-label={language === 'ja' ? 'すべてのブログ記事を表示' : 'View all blog posts'}
                 >
                   <span className="text-coffee-brown hover:text-coffee-espresso transition-colors font-medium border-b border-coffee-brown/30 hover:border-coffee-brown text-sm md:text-base">
                     {data.sections.viewAll} →
                   </span>
-                </Link>
+                </Link> */}
               </div>
-              <div className="overflow-x-auto no-scrollbar pb-8">
-                <div className="flex gap-6 min-w-max px-4">
-                  {data.blogPosts.slice(0, 5).map((post, index) => (
-                    <motion.div
-                      key={post.id}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="w-80 flex-shrink-0 group"
-                    >
-                      <a 
-                        href={post.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        aria-label={`Read article: ${post.title}`}
+              {data.blogPosts.length > 0 ? (
+                <div className="overflow-x-auto no-scrollbar pb-8">
+                  <div className="flex gap-6 min-w-max px-4">
+                    {data.blogPosts.slice(0, 5).map((post, index) => (
+                      <motion.div
+                        key={post.id}
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="w-80 flex-shrink-0 group"
                       >
-                        <div 
-                          className="aspect-video bg-coffee-latte/10 rounded-md mb-4 flex items-center justify-center relative overflow-hidden"
-                          aria-hidden="true"
+                        <a 
+                          href={post.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          aria-label={language === 'ja' ? `記事を読む: ${post.title}` : `Read article: ${post.title}`}
                         >
-                           <div className="absolute inset-0 bg-coffee-brown/0 group-hover:bg-coffee-brown/5 transition-colors" />
-                           <span className="text-coffee-brown/40 font-serif">Article</span>
-                        </div>
-                        <h3 className="text-lg font-bold text-coffee-espresso mb-2 group-hover:text-coffee-brown transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-sm text-coffee-dark/70 mb-2 line-clamp-2">
-                          {post.subtitle}
-                        </p>
-                        <p className="text-xs text-coffee-brown/60 font-mono">
-                          {post.date}
-                        </p>
-                      </a>
-                    </motion.div>
-                  ))}
+                          <div 
+                            className="aspect-video bg-coffee-latte/10 rounded-md mb-4 flex items-center justify-center relative overflow-hidden"
+                            aria-hidden="true"
+                          >
+                             <div className="absolute inset-0 bg-coffee-brown/0 group-hover:bg-coffee-brown/5 transition-colors" />
+                             <span className="text-coffee-brown/40 font-serif">Article</span>
+                          </div>
+                          <h3 className="text-lg font-bold text-coffee-espresso mb-2 group-hover:text-coffee-brown transition-colors">
+                            {post.title}
+                          </h3>
+                          <p className="text-sm text-coffee-dark/70 mb-2 line-clamp-2">
+                            {post.subtitle}
+                          </p>
+                          <p className="text-xs text-coffee-brown/60 font-mono">
+                            {post.date}
+                          </p>
+                        </a>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="flex items-center justify-center py-16">
+                  <p className="text-2xl md:text-3xl font-bold text-coffee-espresso/60">
+                    {data.sections.comingSoon}
+                  </p>
+                </div>
+              )}
             </section>
 
             {/* セクション9: 好きなこと (コーヒーブレイク) */}
@@ -503,7 +538,7 @@ export default function Home() {
                   <a
                     href={`mailto:${emailAddress}`}
                     className="hover:opacity-80 transition-opacity"
-                    aria-label="Send email"
+                    aria-label={language === 'ja' ? 'メールを送信' : 'Send email'}
                   >
                     {emailAddress}
                   </a>

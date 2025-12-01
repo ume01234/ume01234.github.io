@@ -56,7 +56,12 @@ export default function WorksPage() {
                   aria-label={`View work: ${work.title}`}
                 >
                   <h2 className="text-lg font-semibold text-coffee-espresso group-hover:text-coffee-brown transition-colors mb-2">
-                    {work.title}
+                    {work.title.split('|').map((part, index, array) => (
+                      <span key={index}>
+                        {part}
+                        {index < array.length - 1 && <br />}
+                      </span>
+                    ))}
                   </h2>
                   <p className="text-sm text-coffee-dark/70 leading-relaxed">{work.description}</p>
                 </Link>

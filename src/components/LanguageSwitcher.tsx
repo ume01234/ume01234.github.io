@@ -17,7 +17,7 @@ export default function LanguageSwitcher() {
       transition={{ duration: 0.5 }}
       onClick={toggleLanguage}
       className="fixed top-6 right-6 z-[70] px-4 py-2 bg-white/50 backdrop-blur-sm border border-coffee-brown/20 rounded-full hover:bg-white/70 transition-colors text-coffee-espresso text-sm font-medium shadow-lg"
-      aria-label="Switch language"
+      aria-label={language === 'ja' ? '言語を切り替える' : 'Switch language'}
     >
       {language === 'en' ? '日本語' : 'English'}
     </motion.button>

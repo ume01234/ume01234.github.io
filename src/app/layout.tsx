@@ -8,17 +8,17 @@ const siteUrl = 'https://z-ume01234.pages.dev';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'portfolio-Hashizume',
-  description: 'データサイエンスとWebエンジニアリングを主軸に、ジェネラティブアートの感性をスパイスとして加えるエンジニアのポートフォリオサイト',
-  keywords: ['ポートフォリオ', 'エンジニア', 'データサイエンス', 'Webエンジニアリング','Rikuto', 'Rikuto Hashizume', 'Hashizume', 'ume01234','橋爪','橋爪陸人','陸人','学生エンジニア','筑波大学'],
+  title: 'portfolio-Hashizume | Rikuto Hashizume - Data Science & Web Engineering',
+  description: 'データサイエンス、Webエンジニアリング、ロボティクスを横断するジェネラリストエンジニア。複雑な技術から本質的な価値を抽出し、ビジネスやユーザーに届ける架け橋となることを目指しています。筑波大学所属。',
+  keywords: ['ポートフォリオ', 'エンジニア', 'データサイエンス', 'Webエンジニアリング', 'ロボティクス', '機械学習', 'Rikuto', 'Rikuto Hashizume', 'Hashizume', 'ume01234', '橋爪', '橋爪陸人', '陸人', '学生エンジニア', '筑波大学', 'Digital Nature Group'],
   authors: [{ name: 'Rikuto Hashizume' }],
   creator: 'Rikuto Hashizume',
   alternates: {
     canonical: siteUrl,
   },
   openGraph: {
-    title: 'portfolio-Hashizume',
-    description: 'データサイエンスとWebエンジニアリングを主軸に、ジェネラティブアートの感性をスパイスとして加えるエンジニアのポートフォリオサイト',
+    title: 'portfolio-Hashizume | Rikuto Hashizume',
+    description: 'データサイエンス、Webエンジニアリング、ロボティクスを横断するジェネラリストエンジニア。複雑な技術から本質的な価値を抽出し、ビジネスやユーザーに届ける架け橋となることを目指しています。',
     url: siteUrl,
     siteName: 'portfolio-Hashizume',
     locale: 'ja_JP',
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'portfolio-Hashizume',
-    description: 'データサイエンスとWebエンジニアリングを主軸に、ジェネラティブアートの感性をスパイスとして加えるエンジニアのポートフォリオサイト',
+    title: 'portfolio-Hashizume | Rikuto Hashizume',
+    description: 'データサイエンス、Webエンジニアリング、ロボティクスを横断するジェネラリストエンジニア。複雑な技術から本質的な価値を抽出し、ビジネスやユーザーに届ける架け橋となることを目指しています。',
     images: ['/images/ogp-image.png'],
   },
   icons: {
@@ -64,7 +64,7 @@ export default function RootLayout({
     alternateName: ['橋爪 陸人', 'Hashizume Rikuto'],
     url: siteUrl,
     jobTitle: 'Student Engineer',
-    description: 'データサイエンスとWebエンジニアリングを主軸に、ジェネラティブアートの感性をスパイスとして加えるエンジニア',
+    description: 'データサイエンス、Webエンジニアリング、ロボティクスを横断するジェネラリストエンジニア。複雑な技術から本質的な価値を抽出し、ビジネスやユーザーに届ける架け橋となることを目指しています。',
     email: emailAddress,
     sameAs: socialLinks.map(link => link.url),
     alumniOf: {
@@ -74,8 +74,9 @@ export default function RootLayout({
     knowsAbout: [
       'Data Science',
       'Web Engineering',
-      'Generative Art',
+      'Robotics',
       'Machine Learning',
+      'Generative Art',
       'TypeScript',
       'Python',
       'React',
