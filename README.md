@@ -1,10 +1,10 @@
 # portfolio-Hashizume
 
-データサイエンスとWebエンジニアリングを主軸に、ジェネラティブアートの感性をスパイスとして加えるエンジニアのポートフォリオサイトです。
+私のポートフォリオサイトです。
 
 ## プロジェクト概要
 
-コーヒーをテーマにした「Coffee & Flow」というコンセプトで設計されたポートフォリオサイトです。PC版では左右分割レイアウト（左側固定、右側スクロール）、モバイル版では縦スクロールレイアウトを採用しています。
+コーヒーをテーマに設計されたポートフォリオサイトです。PC版では左右分割レイアウト（左側固定、右側スクロール）、モバイル版では縦スクロールレイアウトを採用しています。
 
 ### 主な特徴
 
@@ -96,10 +96,3 @@ Cloudflare Pagesへの自動デプロイはGitHub Actionsで設定されてい�
 - **静的サイト生成**: `output: 'export'`を使用、動的ルートは`generateStaticParams()`で事前生成
 - **SEO最適化**: Schema.orgの`Person`タイプの構造化データ、サイトマップ、robots.txtを実装
 
-## 作成者
-
-**Rikuto Hashizume (橋爪 陸人)**
-
-- GitHub: [@ume01234](https://github.com/ume01234)
-- LinkedIn: [Rikuto Hashizume](https://www.linkedin.com/in/rikuto-h-aa316137a/)
-- Email: zume2.dev@gmail.com
