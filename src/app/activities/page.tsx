@@ -3,9 +3,13 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import { activities } from '@/lib/data';
+import { getData } from '@/lib/data';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ActivitiesPage() {
+  const { language } = useLanguage();
+  const data = getData(language);
+
   return (
     <main className="min-h-screen">
       {/* Header */}
@@ -18,7 +22,7 @@ export default function ActivitiesPage() {
               className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
-              Back
+              {data.sections.back}
             </motion.button>
           </Link>
         </div>
@@ -33,11 +37,11 @@ export default function ActivitiesPage() {
             transition={{ duration: 0.6 }}
             className="text-5xl md:text-6xl font-bold mb-16"
           >
-            Current Activities
+            {data.sections.activities}
           </motion.h1>
 
           <div className="space-y-16">
-            {activities.map((activity, index) => (
+            {data.activities.map((activity, index) => (
               <motion.article
                 key={activity.id}
                 initial={{ opacity: 0, y: 30 }}

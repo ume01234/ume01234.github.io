@@ -41,14 +41,10 @@ type Language = 'en' | 'ja';
 const data = {
   en: {
     profileData: {
-      name: 'Your Name',
-      catchCopy: 'An Engineer Traveling Through the Galaxy',
+      name: 'Rikuto Hashizume',
+      catchCopy: 'The Brewing Engineer',
       vision: 'Creating new worlds through technology',
-      aboutMe: `I am a developer who values the depth and tranquility found in a cup of coffee. Just as coffee requires time and care to brew, I approach technology with patience and attention to detail.
-
-My philosophy centers on creating meaningful connections between people and technology. I believe that great products emerge from understanding both the technical possibilities and the human needs they serve. Through my work, I strive to bridge the gap between complex systems and intuitive user experiences.
-
-I am passionate about continuous learning and growth, always seeking to expand my knowledge across different domains. Whether it's exploring new frameworks, contributing to open source projects, or collaborating with diverse teams, I find joy in the process of discovery and creation.`,
+      aboutMe: `I focus on data science and web engineering as my core disciplines, adding the sensibility of generative art as a spice. My goal is to be an engineer who can break down complex technology and extract (drip) it as "value" that anyone can savor.`,
       education: [
         'University of Tsukuba, College of General Studies, Science Group 3 - Enrollment',
         'University of Tsukuba, School of Informatics, Media Sciences - Transfer',
@@ -83,18 +79,22 @@ I am passionate about continuous learning and growth, always seeking to expand m
     ],
     achievements: {
       certifications: [
+        'EIKEN Grade Pre-1',
+        'Regular Driver\'s License',
         'Fundamental Information Technology Engineer',
         'Applied Information Technology Engineer',
-        'AWS Certified Cloud Practitioner',
       ],
       internships: [
-        'Company ○○ Frontend Development Internship (Summer 2024)',
-        'Company △△ Backend Development Internship (Winter 2023)',
+        'SAP Japan (IT Consultant) March 2024',
+        'Works Applications (DX Planning) August 2025',
+        'Mybest (Data Scientist) September 2025',
+        'Logglass (Engineer) September 2025',
       ],
       events: [
-        'React Conference 2024 Attendance',
-        'Web Technology Study Group Presentation',
-        'Hackathon Winner (Spring 2024)',
+        'The University of Tokyo Matsuo & Iwasawa Lab GCI Winter Completion',
+        'Deep Learning Fundamentals Course (hosted by the above) Completion',
+        'E-Certification Preparation Course (hosted by the above) In Progress',
+        'Track Job Hackathon May 2025 Participation',
       ],
     },
     works: [
@@ -224,22 +224,19 @@ The project demonstrates advanced 3D web development techniques, including custo
       certifications: 'Certifications',
       internships: 'Internships',
       events: 'External Events',
-      works: 'Works',
+      works: 'Projects',
       blog: 'Blog',
       viewAll: 'View All',
       sourceCode: 'Source code is available on',
+      back: 'Back',
     },
   },
   ja: {
     profileData: {
-      name: 'Your Name',
-      catchCopy: '銀河を旅するエンジニア',
+      name: '橋爪 陸人',
+      catchCopy: '技術と感性を、一杯の価値へ',
       vision: '技術を通じて、新しい世界を創造する',
-      aboutMe: `私は一杯のコーヒーを味わうように、落ち着きと深みを持って技術と向き合う開発者です。コーヒーが時間と手間をかけて淹れられるように、技術も丁寧に、そして情熱を持って取り組むことが大切だと考えています。
-
-私の哲学は、人と技術の間に意味のあるつながりを作ることです。技術的な可能性と人間のニーズの両方を理解することで、真に価値のあるプロダクトが生まれると信じています。複雑なシステムと直感的なユーザー体験の間の橋渡しをすることが、私の目標です。
-
-継続的な学習と成長に情熱を注いでおり、常に異なる領域への知識の拡張を求めています。新しいフレームワークの探索、オープンソースプロジェクトへの貢献、多様なチームとの協働など、発見と創造のプロセスに喜びを見出しています。`,
+      aboutMe: `データサイエンスとWebエンジニアリングを主軸に、ジェネラティブアートの感性をスパイスとして加えています。目指しているのは、複雑な技術を噛み砕き、誰もが味わえる「価値」として抽出（ドリップ）できるエンジニアです。`,
       education: [
         '筑波大学 総合学域群 理系3　入学',
         '筑波大学 情報学群メディア創成学類　移行',
@@ -274,18 +271,22 @@ The project demonstrates advanced 3D web development techniques, including custo
     ],
     achievements: {
       certifications: [
+        '実用英語検定準一級',
+        '普通自動車免許',
         '基本情報技術者',
         '応用情報技術者',
-        'AWS Certified Cloud Practitioner',
       ],
       internships: [
-        '株式会社○○ フロントエンド開発インターン（2024年夏）',
-        '株式会社△△ バックエンド開発インターン（2023年冬）',
+        'SAP Japan（ITコンサルタント）2024年3月',
+        'Works Applications（DX企画）2025年8月',
+        'Mybest（データサイエンティスト）2025年9月',
+        'Logglass（エンジニア）2025年9月',
       ],
       events: [
-        'React Conference 2024 参加',
-        'Web技術勉強会 登壇',
-        'ハッカソン優勝（2024年春）',
+        '東京大学松尾・岩澤研究室 GCI Winter 修了',
+        '同上主催 深層学習基礎講座 修了',
+        '同上主催 E資格対策講座 受講中',
+        'Track Job Hackathon 2025年5月参加',
       ],
     },
     works: [
@@ -415,10 +416,11 @@ The project demonstrates advanced 3D web development techniques, including custo
       certifications: '資格',
       internships: 'インターン',
       events: '外部イベント',
-      works: 'Works',
-      blog: 'Blog',
+      works: 'プロジェクト',
+      blog: 'ブログ',
       viewAll: '一覧へ',
       sourceCode: 'ソースコードは',
+      back: '戻る',
     },
   },
 };
@@ -429,23 +431,28 @@ export const repositoryUrl = 'https://github.com/yourusername/portfolio-site';
 export const socialLinks: SocialLink[] = [
   {
     name: 'GitHub',
-    url: 'https://github.com/yourusername',
+    url: 'https://github.com/ume01234',
     icon: 'github',
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/yourusername',
+    url: 'https://www.linkedin.com/in/rikuto-h-aa316137a/',
     icon: 'linkedin',
   },
   {
-    name: 'X (Twitter)',
-    url: 'https://twitter.com/yourusername',
-    icon: 'twitter',
+    name: 'Medium',
+    url: 'https://medium.com/@zume2.dev',
+    icon: 'newspaper',
   },
   {
-    name: 'Medium',
-    url: 'https://medium.com/@yourusername',
-    icon: 'book-open',
+    name: 'Note',
+    url: 'https://note.com/triple_field/portal',
+    icon: 'pen-tool',
+  },
+  {
+    name: 'Zenn',
+    url: 'https://zenn.dev/sunlight_white',
+    icon: 'file-text',
   },
 ];
 

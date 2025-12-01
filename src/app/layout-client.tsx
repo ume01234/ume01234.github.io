@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import OpeningAnimation from '@/components/OpeningAnimation';
 import SteamCursor from '@/components/SteamCursor';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { LanguageProvider } from '@/contexts/LanguageContext';
 
 export default function LayoutClient({
@@ -18,6 +19,7 @@ export default function LayoutClient({
       {showContent && (
         <>
           <SteamCursor />
+          <LanguageSwitcher />
           {children}
         </>
       )}

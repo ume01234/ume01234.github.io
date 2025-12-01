@@ -22,7 +22,7 @@ export default function WorksPage() {
               className="flex items-center gap-2 text-coffee-espresso/70 hover:text-coffee-espresso transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
-              Back
+              {data.sections.back}
             </motion.button>
           </Link>
         </div>

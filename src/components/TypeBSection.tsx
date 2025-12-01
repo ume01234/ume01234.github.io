@@ -9,8 +9,8 @@ interface TypeBSectionProps {
 
 export default function TypeBSection({ title, chunks }: TypeBSectionProps) {
   return (
-    <section className="min-h-[30vh] px-6 py-8 md:py-12 flex flex-col justify-center">
-      <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
+    <section className="min-h-[30vh] px-6 py-8 md:py-8 flex flex-col justify-center">
+      <h2 className="text-xl md:text-2xl font-bold mb-8 text-coffee-espresso">
         {title}
       </h2>
       <div className="overflow-x-auto no-scrollbar pb-8">

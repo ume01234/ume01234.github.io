@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Github, Linkedin, Twitter, BookOpen } from 'lucide-react';
+import { Github, Linkedin, Twitter, BookOpen, FileText, PenTool, Newspaper, Mail } from 'lucide-react';
 import {
   getData,
   socialLinks,
@@ -11,7 +11,6 @@ import {
 } from '@/lib/data';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LiquidBackground from '@/components/LiquidBackground';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
 import TypeBSection from '@/components/TypeBSection';
 import ScrollToTop from '@/components/ScrollToTop';
 
@@ -20,6 +19,9 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   linkedin: Linkedin,
   twitter: Twitter,
   'book-open': BookOpen,
+  'file-text': FileText,
+  'pen-tool': PenTool,
+  newspaper: Newspaper,
 };
 
 // Type B用: 配列を5行ごとにチャンクに分割
@@ -90,7 +92,6 @@ export default function Home() {
 
   return (
     <main className="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-coffee-cream">
-      <LanguageSwitcher />
       <ScrollToTop scrollContainerRef={scrollContainerRef} />
           
           {/* 左側: 固定サイドバー */}
@@ -211,7 +212,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.8, delay: 0.8 }}
-                  className="flex gap-4 justify-center"
+                  className="flex gap-4 justify-center mb-4"
                 >
                   {socialLinks.map((social) => {
                     const Icon = iconMap[social.icon] || Github;
@@ -222,18 +223,34 @@ export default function Home() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-white hover:scale-110 transition-transform"
+                        aria-label={social.name}
                       >
                         <Icon className="w-6 h-6" />
                       </a>
                     );
                   })}
                 </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1.0 }}
+                  className="flex items-center justify-center gap-2 text-white/90 hover:text-white transition-colors"
+                >
+                  <Mail className="w-4 h-4" />
+                  <a
+                    href="mailto:zume2.dev@gmail.com"
+                    className="text-sm hover:underline"
+                    aria-label="Send email"
+                  >
+                    zume2.dev@gmail.com
+                  </a>
+                </motion.div>
               </div>
             </section>
 
             {/* セクション1: 私について */}
-            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
+            <section className="min-h-[40vh] px-6 py-8 md:py-8 flex flex-col justify-center">
+              <h2 className="text-xl md:text-2xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.aboutMe}
               </h2>
               <div className="text-coffee-dark leading-loose whitespace-pre-line text-lg max-w-4xl mx-auto">
@@ -242,8 +259,8 @@ export default function Home() {
             </section>
 
             {/* セクション2: 所属・学歴 */}
-            <section className="min-h-[30vh] px-6 py-8 md:py-12 flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
+            <section className="min-h-[30vh] px-6 py-8 md:py-8 flex flex-col justify-center">
+              <h2 className="text-xl md:text-2xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.education}
               </h2>
               <div className="overflow-x-auto no-scrollbar pb-8">
@@ -268,8 +285,8 @@ export default function Home() {
             </section>
 
             {/* セクション3: 現在の主な取り組み (Netflix風 横スクロール) */}
-            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
+            <section className="min-h-[40vh] px-6 py-8 md:py-8 flex flex-col justify-center">
+              <h2 className="text-xl md:text-2xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.activities}
               </h2>
               {/* スクロールエリア */}
@@ -316,9 +333,9 @@ export default function Home() {
             <TypeBSection title={data.sections.events} chunks={eventChunks} />
 
             {/* セクション7: Works (Netflix風) */}
-            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
+            <section className="min-h-[40vh] px-6 py-8 md:py-8 flex flex-col justify-center">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-coffee-espresso">
+                <h2 className="text-xl md:text-2xl font-bold text-coffee-espresso">
                   {data.sections.works}
                 </h2>
                 <Link 
@@ -370,7 +387,7 @@ export default function Home() {
             {/* セクション8: Blog (Netflix風) */}
             <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center mb-20">
               <div className="flex items-center justify-between mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-coffee-espresso">
+                <h2 className="text-xl md:text-2xl font-bold text-coffee-espresso">
                   {data.sections.blog}
                 </h2>
                 <Link 
@@ -429,6 +446,15 @@ export default function Home() {
             <footer className="px-6 py-12 border-t border-coffee-brown/10 bg-[#fffdf9]">
               <div className="text-center text-sm space-y-2" style={{ color: '#B0E0E6' }}>
                 <p>© 2024 {data.profileData.name}</p>
+                <p>
+                  <a
+                    href="mailto:zume2.dev@gmail.com"
+                    className="hover:opacity-80 transition-opacity"
+                    aria-label="Send email"
+                  >
+                    zume2.dev@gmail.com
+                  </a>
+                </p>
                 <p>
                   {language === 'ja' ? (
                     <>
