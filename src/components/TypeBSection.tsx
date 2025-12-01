@@ -9,7 +9,7 @@ interface TypeBSectionProps {
 
 export default function TypeBSection({ title, chunks }: TypeBSectionProps) {
   return (
-    <section className="min-h-[30vh] px-6 py-10 md:py-14 flex flex-col justify-center">
+    <section className="min-h-[30vh] px-6 py-8 md:py-12 flex flex-col justify-center">
       <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
         {title}
       </h2>
@@ -24,7 +24,7 @@ export default function TypeBSection({ title, chunks }: TypeBSectionProps) {
               transition={{ delay: i * 0.1 }}
               className="min-w-64 flex-shrink-0"
             >
-              <ul className="space-y-4 border-l-2 border-coffee-brown/20 pl-6">
+              <ul className="space-y-2 border-l-2 border-coffee-brown/20 pl-6">
                 {chunk.map((item, j) => (
                   <li key={j} className="text-coffee-dark font-medium whitespace-nowrap">
                     {item}

@@ -7,6 +7,7 @@ import { Github, Linkedin, Twitter, BookOpen } from 'lucide-react';
 import {
   getData,
   socialLinks,
+  repositoryUrl,
 } from '@/lib/data';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LiquidBackground from '@/components/LiquidBackground';
@@ -173,18 +174,65 @@ export default function Home() {
             className="flex-1 bg-coffee-cream overflow-y-auto relative scroll-smooth"
           >
             {/* モバイル用ヘッダー */}
-            <section className="md:hidden min-h-screen flex flex-col items-center justify-center px-6 bg-coffee-gradient relative text-[#fdfbf7]">
-              <div className="text-center z-10">
-                <h1 className="text-4xl font-serif mb-6 font-light">
+            <section className="md:hidden min-h-screen flex flex-col items-center justify-center px-6 bg-coffee-cream relative overflow-hidden">
+              {/* コーヒー液体背景（モバイル版では固定位置：高い位置で固定） */}
+              <div className="absolute inset-0 z-0">
+                <LiquidBackground scrollProgress={0} fixedPosition={true} />
+              </div>
+              
+              {/* PC版と同様のスタイル */}
+              <div className="relative z-10 text-center px-8 mix-blend-difference text-white">
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="text-4xl font-serif mb-6 font-light drop-shadow-md"
+                  style={{ fontFamily: '"Noto Serif JP", serif' }}
+                >
                   {data.profileData.catchCopy}
-                </h1>
-                <p className="text-xl mb-2">{data.profileData.name}</p>
-                <p className="text-sm opacity-80 mb-8">{data.profileData.vision}</p>
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="text-xl mb-2 drop-shadow-md"
+                >
+                  {data.profileData.name}
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  className="text-sm opacity-90 mb-8 drop-shadow-md font-medium"
+                >
+                  {data.profileData.vision}
+                </motion.p>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 0.8 }}
+                  className="flex gap-4 justify-center"
+                >
+                  {socialLinks.map((social) => {
+                    const Icon = iconMap[social.icon] || Github;
+                    return (
+                      <a
+                        key={social.name}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white hover:scale-110 transition-transform"
+                      >
+                        <Icon className="w-6 h-6" />
+                      </a>
+                    );
+                  })}
+                </motion.div>
               </div>
             </section>
 
             {/* セクション1: 経歴・学歴 */}
-            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center max-w-4xl mx-auto">
+            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center max-w-4xl mx-auto">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -199,7 +247,7 @@ export default function Home() {
             </section>
 
             {/* セクション2: 現在の主な取り組み (Netflix風 横スクロール) */}
-            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center">
+            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.activities}
               </h2>
@@ -247,25 +295,33 @@ export default function Home() {
             <TypeBSection title={data.sections.events} chunks={eventChunks} />
 
             {/* セクション6: Works (Netflix風) */}
-            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
-                {data.sections.works}
-              </h2>
+            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-coffee-espresso">
+                  {data.sections.works}
+                </h2>
+                <Link 
+                  href="/works"
+                  aria-label="View all works"
+                >
+                  <span className="text-coffee-brown hover:text-coffee-espresso transition-colors font-medium border-b border-coffee-brown/30 hover:border-coffee-brown text-sm md:text-base">
+                    {data.sections.viewAll} →
+                  </span>
+                </Link>
+              </div>
               <div className="overflow-x-auto no-scrollbar pb-8">
                 <div className="flex gap-6 min-w-max px-4">
                   {data.works.map((work, index) => (
                     <motion.div
-                      key={index}
+                      key={work.id}
                       initial={{ opacity: 0, x: 20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       className="w-80 flex-shrink-0 group"
                     >
-                      <a 
-                        href={work.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                      <Link 
+                        href={`/works/${work.id}`}
                         aria-label={`View ${work.title} - ${work.description}`}
                       >
                         <div 
@@ -283,7 +339,7 @@ export default function Home() {
                         <p className="text-sm text-coffee-dark/80 leading-relaxed">
                           {work.description}
                         </p>
-                      </a>
+                      </Link>
                     </motion.div>
                   ))}
                 </div>
@@ -291,10 +347,20 @@ export default function Home() {
             </section>
 
             {/* セクション7: Blog (Netflix風) */}
-            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center mb-20">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
-                {data.sections.blog}
-              </h2>
+            <section className="min-h-[40vh] px-6 py-8 md:py-12 flex flex-col justify-center mb-20">
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-coffee-espresso">
+                  {data.sections.blog}
+                </h2>
+                <Link 
+                  href="/blog"
+                  aria-label="View all blog posts"
+                >
+                  <span className="text-coffee-brown hover:text-coffee-espresso transition-colors font-medium border-b border-coffee-brown/30 hover:border-coffee-brown text-sm md:text-base">
+                    {data.sections.viewAll} →
+                  </span>
+                </Link>
+              </div>
               <div className="overflow-x-auto no-scrollbar pb-8">
                 <div className="flex gap-6 min-w-max px-4">
                   {data.blogPosts.slice(0, 5).map((post, index) => (
@@ -333,16 +399,6 @@ export default function Home() {
                   ))}
                 </div>
               </div>
-              <div className="mt-8 flex justify-end px-4">
-                <Link 
-                  href="/blog"
-                  aria-label="View all blog posts"
-                >
-                  <span className="text-coffee-brown hover:text-coffee-espresso transition-colors font-medium border-b border-coffee-brown/30 hover:border-coffee-brown">
-                    {data.sections.viewAll} →
-                  </span>
-                </Link>
-              </div>
             </section>
 
             {/* スクロール余白 */}
@@ -350,8 +406,39 @@ export default function Home() {
 
             {/* Footer */}
             <footer className="px-6 py-12 border-t border-coffee-brown/10 bg-[#fffdf9]">
-              <div className="text-center text-sm" style={{ color: '#B0E0E6' }}>
+              <div className="text-center text-sm space-y-2" style={{ color: '#B0E0E6' }}>
                 <p>© 2024 {data.profileData.name}</p>
+                <p>
+                  {language === 'ja' ? (
+                    <>
+                      {data.sections.sourceCode}{' '}
+                      <a
+                        href={repositoryUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:opacity-80 transition-opacity"
+                        aria-label="GitHubでソースコードを表示"
+                      >
+                        GitHub
+                      </a>
+                      で公開しています
+                    </>
+                  ) : (
+                    <>
+                      {data.sections.sourceCode}{' '}
+                      <a
+                        href={repositoryUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline hover:opacity-80 transition-opacity"
+                        aria-label="View source code on GitHub"
+                      >
+                        GitHub
+                      </a>
+                      .
+                    </>
+                  )}
+                </p>
               </div>
             </footer>
           </div>

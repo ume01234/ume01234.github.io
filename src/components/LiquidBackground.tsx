@@ -1,22 +1,29 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useId } from 'react';
 
 interface LiquidBackgroundProps {
   scrollProgress: number; // 0が満タン、1が空
+  fixedPosition?: boolean; // モバイル版で固定位置にするかどうか
 }
 
-export default function LiquidBackground({ scrollProgress }: LiquidBackgroundProps) {
+export default function LiquidBackground({ scrollProgress, fixedPosition = false }: LiquidBackgroundProps) {
   const svgRef = useRef<SVGSVGElement>(null);
+  const gradientId = useId(); // ユニークなIDを生成
   
   // 【重要】 最新のprogressを保持するためのRef
   // これにより、アニメーションループをリセットせずに水位だけを変更できます
   const progressRef = useRef(scrollProgress);
 
   // propsが変わったらRefを同期
+  // fixedPositionがtrueの場合は常に0（満タン）に設定
   useEffect(() => {
-    progressRef.current = scrollProgress;
-  }, [scrollProgress]);
+    if (fixedPosition) {
+      progressRef.current = 0;
+    } else {
+      progressRef.current = scrollProgress;
+    }
+  }, [scrollProgress, fixedPosition]);
 
   useEffect(() => {
     const svg = svgRef.current;
@@ -42,7 +49,9 @@ export default function LiquidBackground({ scrollProgress }: LiquidBackgroundPro
       // 水位の計算
       // 0 (満タン) -> 15
       // 1 (空) -> 110 (画面外)
-      const baseY = 15 + (currentProgress * 105);
+      // モバイル版で固定位置の場合は、高い位置（満タン）で固定
+      const progress = fixedPosition ? 0 : currentProgress;
+      const baseY = 15 + (progress * 105);
       
       paths.forEach((path, layerIndex) => {
         const layer = layers[layerIndex % layers.length]; 
@@ -57,7 +66,9 @@ export default function LiquidBackground({ scrollProgress }: LiquidBackgroundPro
           const y2 = Math.sin(time * layer.speed * 1.5 + x * layer.freq * 2.5) * 0.3;
           
           // 進捗に合わせて波を少し穏やかにする（液体が減る演出）
-          const dampener = Math.max(0.2, 1 - (currentProgress * 0.8));
+          // fixedPositionの場合は常に満タン状態なので、dampenerは1.0
+          const progressForDampener = fixedPosition ? 0 : currentProgress;
+          const dampener = Math.max(0.2, 1 - (progressForDampener * 0.8));
           const waveY = (y1 + y2) * layer.amp * dampener;
           
           points.push([x, baseY + waveY]);
@@ -95,15 +106,15 @@ export default function LiquidBackground({ scrollProgress }: LiquidBackgroundPro
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          <linearGradient id="coffeeDeep" x1="0%" y1="0%" x2="0%" y2="100%">
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#4e342e" /> {/* 表面: 明るめ */}
             <stop offset="100%" stopColor="#251610" /> {/* 深層: 濃い色 */}
           </linearGradient>
         </defs>
         
-        <path fill="url(#coffeeDeep)" opacity="0.6" />
-        <path fill="url(#coffeeDeep)" opacity="0.8" />
-        <path fill="url(#coffeeDeep)" opacity="1.0" />
+        <path fill={`url(#${gradientId})`} opacity="0.6" />
+        <path fill={`url(#${gradientId})`} opacity="0.8" />
+        <path fill={`url(#${gradientId})`} opacity="1.0" />
       </svg>
     </div>
   );

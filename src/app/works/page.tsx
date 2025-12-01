@@ -6,7 +6,7 @@ import { ArrowLeft } from 'lucide-react';
 import { getData } from '@/lib/data';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-export default function BlogPage() {
+export default function WorksPage() {
   const { language } = useLanguage();
   const data = getData(language);
 
@@ -37,39 +37,29 @@ export default function BlogPage() {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-5xl font-bold mb-8 text-coffee-espresso"
           >
-            {data.sections.blog}
+            {data.sections.works}
           </motion.h1>
 
           <div className="space-y-2">
-            {data.blogPosts.map((post, index) => (
+            {data.works.map((work, index) => (
               <motion.article
-                key={post.id}
+                key={work.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.05 }}
                 className="bg-white/80 backdrop-blur-sm border border-coffee-brown/30 rounded-lg p-4 hover:bg-white hover:shadow-md transition-all"
               >
-                <a
-                  href={post.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={`/works/${work.id}`}
                   className="block group"
-                  aria-label={`Read article: ${post.title} on ${post.platform || 'blog'}`}
+                  aria-label={`View work: ${work.title}`}
                 >
-                  <div className="flex items-start justify-between gap-3 mb-2">
-                    <h2 className="text-lg font-semibold text-coffee-espresso group-hover:text-coffee-brown transition-colors flex-1">
-                      {post.title}
-                    </h2>
-                    {post.platform && (
-                      <span className="px-2 py-0.5 bg-coffee-brown/20 text-coffee-espresso text-xs font-medium rounded-full whitespace-nowrap flex-shrink-0">
-                        {post.platform}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-coffee-dark/70 mb-2 leading-relaxed">{post.subtitle}</p>
-                  <p className="text-coffee-brown/60 text-xs">{post.date}</p>
-                </a>
+                  <h2 className="text-lg font-semibold text-coffee-espresso group-hover:text-coffee-brown transition-colors mb-2">
+                    {work.title}
+                  </h2>
+                  <p className="text-sm text-coffee-dark/70 leading-relaxed">{work.description}</p>
+                </Link>
               </motion.article>
             ))}
           </div>
@@ -78,3 +68,4 @@ export default function BlogPage() {
     </main>
   );
 }
+

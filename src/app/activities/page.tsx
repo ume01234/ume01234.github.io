@@ -18,7 +18,7 @@ export default function ActivitiesPage() {
               className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-5 h-5" />
-              Back to Earth
+              Back
             </motion.button>
           </Link>
         </div>
