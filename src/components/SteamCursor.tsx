@@ -7,13 +7,12 @@ export default function SteamCursor() {
   const [steams, setSteams] = useState<{ id: number; x: number; y: number }[]>([]);
 
   useEffect(() => {
-    let count = 0;
     const handleMouseMove = (e: MouseEvent) => {
       // 負荷軽減のため、マウスイベントの間引き（数回に1回だけ生成）
       if (Math.random() > 0.3) return;
 
       const newSteam = {
-        id: count++,
+        id: Date.now() + Math.random(), // ユニークID生成（Date.now()ベース）
         x: e.clientX,
         y: e.clientY,
       };

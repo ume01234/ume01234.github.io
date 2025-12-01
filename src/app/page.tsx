@@ -11,7 +11,8 @@ import {
 import { useLanguage } from '@/contexts/LanguageContext';
 import LiquidBackground from '@/components/LiquidBackground';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
-import OpeningAnimation from '@/components/OpeningAnimation'; // 追加
+import TypeBSection from '@/components/TypeBSection';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   github: Github,
@@ -21,9 +22,11 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 // Type B用: 配列を5行ごとにチャンクに分割
-function chunkArray<T>(array: T[], chunkSize: number): T[][] {
+function chunkArray<T>(array: T[] | undefined | null, chunkSize: number): T[][] {
+  if (!array || array.length === 0) return [];
+  if (chunkSize <= 0) return [array];
+  
   const chunks: T[][] = [];
-  if (!array) return [];
   for (let i = 0; i < array.length; i += chunkSize) {
     chunks.push(array.slice(i, i + chunkSize));
   }
@@ -33,7 +36,6 @@ function chunkArray<T>(array: T[], chunkSize: number): T[][] {
 export default function Home() {
   const { language } = useLanguage();
   const data = getData(language);
-  const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -42,39 +44,53 @@ export default function Home() {
   const internshipChunks = chunkArray(data.achievements.internships, 5);
   const eventChunks = chunkArray(data.achievements.events, 5);
 
-  // スクロール進捗を計算
+  // スクロール進捗を計算（パフォーマンス最適化: requestAnimationFrame使用）
   useEffect(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
 
-    const handleScroll = () => {
+    let rafId: number | null = null;
+    let ticking = false;
+
+    const updateScrollProgress = () => {
       const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
       const maxScroll = scrollHeight - clientHeight;
       
       if (maxScroll <= 0) {
         setScrollProgress(0);
+        ticking = false;
         return;
       }
       
       const progress = scrollTop / maxScroll;
       setScrollProgress(Math.min(Math.max(progress, 0), 1));
+      ticking = false;
     };
 
-    scrollContainer.addEventListener('scroll', handleScroll);
-    handleScroll();
+    const handleScroll = () => {
+      if (!ticking) {
+        rafId = requestAnimationFrame(() => {
+          updateScrollProgress();
+        });
+        ticking = true;
+      }
+    };
+
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+    updateScrollProgress(); // 初期値計算
 
     return () => {
       scrollContainer.removeEventListener('scroll', handleScroll);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
     };
-  }, [loading, language]);
+  }, []); // 依存配列は空（マウント時のみ）
 
   return (
-    <>
-      <OpeningAnimation onComplete={() => setLoading(false)} />
-
-      {!loading && (
-        <main className="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-coffee-cream">
-          <LanguageSwitcher />
+    <main className="h-screen w-full flex flex-col md:flex-row overflow-hidden bg-coffee-cream">
+      <LanguageSwitcher />
+      <ScrollToTop scrollContainerRef={scrollContainerRef} />
           
           {/* 左側: 固定サイドバー */}
           <motion.aside
@@ -137,12 +153,17 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* 隠しメッセージ */}
-            <div className="absolute bottom-10 left-0 right-0 text-center z-0 pointer-events-none">
-              <p className="text-[#3e2723]/30 text-sm font-serif tracking-widest">
+            {/* 隠しメッセージ（飲み干した時に現れる） */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: scrollProgress > 0.9 ? 1 : 0 }}
+              transition={{ duration: 0.5 }}
+              className="absolute bottom-10 left-0 right-0 text-center z-20 pointer-events-none"
+            >
+              <p className="text-[#3e2723]/40 text-sm font-serif tracking-widest drop-shadow-sm">
                 THANK YOU FOR READING
               </p>
-            </div>
+            </motion.div>
           </motion.aside>
 
           {/* 右側: スクロール可能なコンテンツ */}
@@ -163,12 +184,12 @@ export default function Home() {
             </section>
 
             {/* セクション1: 経歴・学歴 */}
-            <section className="min-h-[40vh] px-6 py-12 md:py-24 flex flex-col justify-center max-w-4xl mx-auto">
+            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center max-w-4xl mx-auto">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-3xl md:text-4xl font-bold mb-8 text-coffee-espresso"
+                className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso"
               >
                 {data.sections.career}
               </motion.h2>
@@ -178,8 +199,8 @@ export default function Home() {
             </section>
 
             {/* セクション2: 現在の主な取り組み (Netflix風 横スクロール) */}
-            <section className="min-h-[40vh] px-6 py-12 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-coffee-espresso">
+            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.activities}
               </h2>
               {/* スクロールエリア */}
@@ -192,10 +213,13 @@ export default function Home() {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="w-80 flex-shrink-0 group cursor-pointer"
+                      className="w-80 flex-shrink-0 group"
                     >
                       {/* サムネイル */}
-                      <div className="aspect-video bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative">
+                      <div 
+                        className="aspect-video bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative"
+                        aria-hidden="true"
+                      >
                          <div className="absolute inset-0 bg-coffee-espresso/0 group-hover:bg-coffee-espresso/10 transition-colors duration-300" />
                          <div className="w-full h-full flex items-center justify-center text-coffee-brown/40">
                             Image
@@ -214,95 +238,17 @@ export default function Home() {
             </section>
 
             {/* セクション3: 資格 (Type B: 5行区切り横スクロール) */}
-            <section className="min-h-[30vh] px-6 py-12 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-coffee-espresso">
-                {data.sections.certifications}
-              </h2>
-              <div className="overflow-x-auto no-scrollbar pb-8">
-                <div className="flex gap-16 min-w-max px-4">
-                  {certChunks.map((chunk, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="w-64 flex-shrink-0"
-                    >
-                      <ul className="space-y-4 border-l-2 border-coffee-brown/20 pl-6">
-                        {chunk.map((cert, j) => (
-                          <li key={j} className="text-coffee-dark font-medium">
-                            {cert}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
+            <TypeBSection title={data.sections.certifications} chunks={certChunks} />
 
             {/* セクション4: インターン (Type B) */}
-            <section className="min-h-[30vh] px-6 py-12 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-coffee-espresso">
-                {data.sections.internships}
-              </h2>
-              <div className="overflow-x-auto no-scrollbar pb-8">
-                <div className="flex gap-16 min-w-max px-4">
-                  {internshipChunks.map((chunk, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="w-64 flex-shrink-0"
-                    >
-                      <ul className="space-y-4 border-l-2 border-coffee-brown/20 pl-6">
-                        {chunk.map((item, j) => (
-                          <li key={j} className="text-coffee-dark font-medium">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
+            <TypeBSection title={data.sections.internships} chunks={internshipChunks} />
 
             {/* セクション5: 外部イベント (Type B) */}
-            <section className="min-h-[30vh] px-6 py-12 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-coffee-espresso">
-                {data.sections.events}
-              </h2>
-              <div className="overflow-x-auto no-scrollbar pb-8">
-                <div className="flex gap-16 min-w-max px-4">
-                  {eventChunks.map((chunk, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="w-64 flex-shrink-0"
-                    >
-                      <ul className="space-y-4 border-l-2 border-coffee-brown/20 pl-6">
-                        {chunk.map((item, j) => (
-                          <li key={j} className="text-coffee-dark font-medium">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </section>
+            <TypeBSection title={data.sections.events} chunks={eventChunks} />
 
             {/* セクション6: Works (Netflix風) */}
-            <section className="min-h-[40vh] px-6 py-12 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-coffee-espresso">
+            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.works}
               </h2>
               <div className="overflow-x-auto no-scrollbar pb-8">
@@ -316,8 +262,16 @@ export default function Home() {
                       transition={{ delay: index * 0.1 }}
                       className="w-80 flex-shrink-0 group"
                     >
-                      <a href={work.url} target="_blank" rel="noopener noreferrer">
-                        <div className="aspect-video bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative">
+                      <a 
+                        href={work.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`View ${work.title} - ${work.description}`}
+                      >
+                        <div 
+                          className="aspect-video bg-coffee-latte/20 rounded-md mb-4 overflow-hidden relative"
+                          aria-hidden="true"
+                        >
                            <div className="absolute inset-0 bg-coffee-espresso/0 group-hover:bg-coffee-espresso/10 transition-colors duration-300" />
                            <div className="w-full h-full flex items-center justify-center text-coffee-brown/40">
                               Work Image
@@ -337,8 +291,8 @@ export default function Home() {
             </section>
 
             {/* セクション7: Blog (Netflix風) */}
-            <section className="min-h-[40vh] px-6 py-12 flex flex-col justify-center mb-20">
-              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-coffee-espresso">
+            <section className="min-h-[40vh] px-6 py-10 md:py-14 flex flex-col justify-center mb-20">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-coffee-espresso">
                 {data.sections.blog}
               </h2>
               <div className="overflow-x-auto no-scrollbar pb-8">
@@ -352,8 +306,16 @@ export default function Home() {
                       transition={{ delay: index * 0.1 }}
                       className="w-80 flex-shrink-0 group"
                     >
-                      <a href={post.url} target="_blank" rel="noopener noreferrer">
-                        <div className="aspect-video bg-coffee-latte/10 rounded-md mb-4 flex items-center justify-center relative overflow-hidden">
+                      <a 
+                        href={post.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        aria-label={`Read article: ${post.title}`}
+                      >
+                        <div 
+                          className="aspect-video bg-coffee-latte/10 rounded-md mb-4 flex items-center justify-center relative overflow-hidden"
+                          aria-hidden="true"
+                        >
                            <div className="absolute inset-0 bg-coffee-brown/0 group-hover:bg-coffee-brown/5 transition-colors" />
                            <span className="text-coffee-brown/40 font-serif">Article</span>
                         </div>
@@ -372,7 +334,10 @@ export default function Home() {
                 </div>
               </div>
               <div className="mt-8 flex justify-end px-4">
-                <Link href="/blog">
+                <Link 
+                  href="/blog"
+                  aria-label="View all blog posts"
+                >
                   <span className="text-coffee-brown hover:text-coffee-espresso transition-colors font-medium border-b border-coffee-brown/30 hover:border-coffee-brown">
                     {data.sections.viewAll} →
                   </span>
@@ -385,13 +350,11 @@ export default function Home() {
 
             {/* Footer */}
             <footer className="px-6 py-12 border-t border-coffee-brown/10 bg-[#fffdf9]">
-              <div className="text-center text-coffee-dark/50 text-sm">
+              <div className="text-center text-sm" style={{ color: '#B0E0E6' }}>
                 <p>© 2024 {data.profileData.name}</p>
               </div>
             </footer>
           </div>
         </main>
-      )}
-    </>
   );
 }

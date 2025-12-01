@@ -15,16 +15,33 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('en'); // デフォルトは英語
 
   useEffect(() => {
+    // SSRエラー対策: windowオブジェクトの存在確認
+    if (typeof window === 'undefined') return;
+    
     // ローカルストレージから言語設定を読み込む
-    const savedLanguage = localStorage.getItem('language') as Language | null;
-    if (savedLanguage === 'en' || savedLanguage === 'ja') {
-      setLanguageState(savedLanguage);
+    try {
+      const savedLanguage = localStorage.getItem('language') as Language | null;
+      if (savedLanguage === 'en' || savedLanguage === 'ja') {
+        setLanguageState(savedLanguage);
+      }
+    } catch (error) {
+      // localStorageが利用できない場合（プライベートモードなど）は無視
+      console.warn('Failed to read from localStorage:', error);
     }
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('language', lang);
+    
+    // SSRエラー対策: windowオブジェクトの存在確認
+    if (typeof window === 'undefined') return;
+    
+    try {
+      localStorage.setItem('language', lang);
+    } catch (error) {
+      // localStorageが利用できない場合（プライベートモードなど）は無視
+      console.warn('Failed to write to localStorage:', error);
+    }
   };
 
   return (
