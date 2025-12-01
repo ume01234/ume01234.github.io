@@ -34,7 +34,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: z-ume01234.pages.dev
+          projectName: z-ume01234
           directory: out
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
