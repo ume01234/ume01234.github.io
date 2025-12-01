@@ -100,9 +100,9 @@ const data = {
     works: [
       {
         id: '1',
-        title: 'Personal Portfolio Site',
-        description: 'This site itself is my first work. A portfolio site themed around space, built with Next.js and Framer Motion.',
-        url: 'https://example.com',
+        title: 'Portfolio Site Development',
+        description: 'This site itself is my first work. A portfolio site themed around coffee, built with Next.js and Framer Motion.',
+        url: 'https://z-ume01234.pages.dev',
         technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Lucide React'],
         features: [
           'Responsive split-screen layout',
@@ -119,60 +119,60 @@ Key highlights include a dynamic liquid background animation that responds to sc
       },
       {
         id: '2',
-        title: 'Task Management App',
-        description: 'A task management application built with React and TypeScript. Implemented drag & drop functionality and real-time synchronization.',
+        title: 'Corporate Website Development (Earth Re Pure Inc.)',
+        description: 'Implemented and maintained a corporate website as a volunteer for an acquaintance\'s company. Also handled server contracts and domain transfers.',
         url: 'https://example.com',
-        technologies: ['React', 'TypeScript', 'Redux', 'Firebase', 'Material-UI'],
+        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Google Analytics'],
         features: [
-          'Drag & drop task organization',
-          'Real-time collaboration',
-          'Task filtering and search',
-          'Due date reminders',
-          'Team workspace management',
+          'Responsive design',
+          'SEO optimization',
+          'Contact form implementation',
+          'Server and domain management',
+          'Content management',
         ],
-        longDescription: `A comprehensive task management application designed to help teams stay organized and productive. Built with React and TypeScript, this app provides a robust foundation for managing complex workflows.
+        longDescription: `Developed and maintained a corporate website for Earth Re Pure Inc. as a volunteer project. The website was built using modern web technologies to ensure optimal performance and user experience.
 
-The application features an intuitive drag-and-drop interface that allows users to easily reorganize tasks and priorities. Real-time synchronization powered by Firebase ensures that team members always have access to the latest updates, enabling seamless collaboration.
+Key responsibilities included implementing the website structure, setting up hosting infrastructure, managing domain transfers, and ensuring smooth operation. The project involved working closely with the client to understand their needs and deliver a solution that effectively represents their business.
 
-Key features include advanced filtering and search capabilities, customizable task views, and intelligent due date reminders. The app supports multiple workspaces, allowing teams to organize projects by department, client, or any other criteria. The Material-UI design system ensures a consistent, professional appearance across all platforms.`,
+The website features a clean, professional design that is fully responsive across all devices. SEO optimization was implemented to improve search engine visibility, and a contact form was integrated to facilitate communication with potential customers.`,
       },
       {
         id: '3',
-        title: 'Weather Dashboard',
-        description: 'A dashboard utilizing weather APIs. A project pursuing beautiful UI and intuitive usability.',
+        title: 'Deep Learning × Art: Model Accuracy Improvement Experiment',
+        description: 'Conducted an experiment to improve accuracy for the art domain by fine-tuning an image captioning model.',
         url: 'https://example.com',
-        technologies: ['Vue.js', 'Chart.js', 'OpenWeatherMap API', 'CSS3', 'PWA'],
+        technologies: ['Python', 'PyTorch', 'Transformers', 'Hugging Face', 'Jupyter Notebook'],
         features: [
-          'Real-time weather data',
-          'Interactive weather charts',
-          '7-day forecast',
-          'Location-based weather',
-          'Offline PWA support',
+          'Image captioning model fine-tuning',
+          'Art domain dataset preparation',
+          'Model evaluation and metrics',
+          'Transfer learning techniques',
+          'Performance optimization',
         ],
-        longDescription: `A beautiful and intuitive weather dashboard that provides users with comprehensive weather information at a glance. The application leverages the OpenWeatherMap API to deliver accurate, real-time weather data for locations worldwide.
+        longDescription: `This research project focused on improving the accuracy of image captioning models specifically for the art domain. By fine-tuning pre-trained models on a curated dataset of artworks, I aimed to enhance the model's ability to generate accurate and contextually relevant captions for paintings and other artistic works.
 
-The dashboard features interactive charts that visualize temperature trends, precipitation forecasts, and other meteorological data. Users can easily switch between different locations and view detailed 7-day forecasts with hourly breakdowns.
+The experiment involved collecting and preprocessing a specialized dataset of artworks, fine-tuning transformer-based models using transfer learning techniques, and evaluating performance using various metrics. The project demonstrated the effectiveness of domain-specific fine-tuning in improving model accuracy for specialized use cases.
 
-The design prioritizes clarity and usability, with a clean interface that makes it easy to understand weather conditions at a glance. The application is built as a Progressive Web App (PWA), allowing users to install it on their devices and access weather information even when offline. Responsive design ensures optimal viewing experience across desktop, tablet, and mobile devices.`,
+Key achievements included successfully adapting general-purpose image captioning models to the art domain, achieving improved accuracy metrics, and documenting the fine-tuning process and results for future reference.`,
       },
       {
         id: '4',
-        title: 'Art Gallery',
-        description: 'A 3D art gallery using Three.js. Showcasing works through interactive experiences.',
+        title: 'Reinforcement Learning × Game: Agent Creation',
+        description: 'Conducted an experiment to create game agents using reinforcement learning and train them to learn optimal actions.',
         url: 'https://example.com',
-        technologies: ['Three.js', 'React', 'WebGL', 'GSAP', 'Blender'],
+        technologies: ['Python', 'PyTorch', 'Gymnasium', 'Stable-Baselines3', 'NumPy'],
         features: [
-          '3D virtual gallery space',
-          'Interactive artwork exploration',
-          'VR/AR compatibility',
-          'Dynamic lighting effects',
-          'Artwork detail views',
+          'RL agent implementation',
+          'Environment setup and configuration',
+          'Policy optimization',
+          'Reward function design',
+          'Training and evaluation',
         ],
-        longDescription: `An immersive 3D virtual art gallery that brings artwork to life through interactive web experiences. Built with Three.js and WebGL, this project creates a photorealistic gallery environment that users can explore from their browsers.
+        longDescription: `This project involved creating intelligent game agents using reinforcement learning techniques. The goal was to train agents that could learn optimal strategies through interaction with game environments, demonstrating the power of RL in solving complex decision-making problems.
 
-The gallery features a carefully designed 3D space with realistic lighting and materials, creating an authentic museum-like atmosphere. Users can navigate through the gallery using intuitive controls, zoom in on artworks to view fine details, and access additional information about each piece.
+The implementation involved setting up game environments using Gymnasium, implementing various RL algorithms such as PPO and DQN, and training agents to achieve high performance. The project explored different reward functions and training strategies to optimize agent behavior.
 
-The project demonstrates advanced 3D web development techniques, including custom shaders, post-processing effects, and optimized rendering pipelines. The gallery is designed to be accessible across different devices, with performance optimizations ensuring smooth experiences even on lower-end hardware. Future plans include VR/AR support to create even more immersive viewing experiences.`,
+Key outcomes included successfully training agents that could outperform baseline strategies, understanding the trade-offs between different RL algorithms, and gaining practical experience in implementing and tuning reinforcement learning systems. The project provided valuable insights into the challenges and opportunities in applying RL to game environments.`,
       },
     ],
     blogPosts: [
@@ -292,9 +292,9 @@ The project demonstrates advanced 3D web development techniques, including custo
     works: [
       {
         id: '1',
-        title: 'Personal Portfolio Site',
-        description: 'このサイト自体が最初の作品です。Next.jsとFramer Motionを活用した、コーヒーをテーマにしたポートフォリオサイト。',
-        url: 'https://example.com',
+        title: 'ポートフォリオサイト制作',
+        description: 'このサイト自体が作品の一つです。Next.jsとFramer Motionを活用した、コーヒーをテーマにしたポートフォリオサイト。',
+        url: 'https://z-ume01234.pages.dev',
         technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Lucide React'],
         features: [
           'レスポンシブな分割画面レイアウト',
@@ -311,60 +311,60 @@ The project demonstrates advanced 3D web development techniques, including custo
       },
       {
         id: '2',
-        title: 'Task Management App',
-        description: 'ReactとTypeScriptで構築したタスク管理アプリケーション。ドラッグ&ドロップ機能とリアルタイム同期を実装。',
+        title: '企業webサイト制作(株式会社earth re pure)',
+        description: 'ボランティアとして知人企業のwebサイトを実装・運用。サーバーの契約やドメインの移管等も行いました。',
         url: 'https://example.com',
-        technologies: ['React', 'TypeScript', 'Redux', 'Firebase', 'Material-UI'],
+        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel', 'Google Analytics'],
         features: [
-          'ドラッグ&ドロップによるタスク整理',
-          'リアルタイムコラボレーション',
-          'タスクのフィルタリングと検索',
-          '期限リマインダー',
-          'チームワークスペース管理',
+          'レスポンシブデザイン',
+          'SEO最適化',
+          'お問い合わせフォーム実装',
+          'サーバー・ドメイン管理',
+          'コンテンツ管理',
         ],
-        longDescription: `チームが整理整頓され、生産性を維持できるように設計された包括的なタスク管理アプリケーション。ReactとTypeScriptで構築され、複雑なワークフローを管理するための堅牢な基盤を提供します。
+        longDescription: `株式会社earth re pureの企業サイトをボランティアとして開発・運用しました。モダンなWeb技術を使用して、パフォーマンスとユーザー体験を最適化したサイトを構築しました。
 
-アプリケーションは、ユーザーがタスクと優先順位を簡単に再編成できる直感的なドラッグ&ドロップインターフェースを特徴としています。Firebaseによって強化されたリアルタイム同期により、チームメンバーは常に最新の更新にアクセスでき、シームレスなコラボレーションを可能にします。
+主な業務内容として、サイト構造の実装、ホスティングインフラの構築、ドメイン移管の管理、そしてスムーズな運用を担当しました。クライアントと密に連携し、ビジネスニーズを理解した上で、効果的に企業を表現するソリューションを提供しました。
 
-主な機能には、高度なフィルタリングと検索機能、カスタマイズ可能なタスクビュー、インテリジェントな期限リマインダーが含まれます。アプリは複数のワークスペースをサポートし、チームが部門、クライアント、またはその他の基準でプロジェクトを整理できるようにします。Material-UIデザインシステムにより、すべてのプラットフォームで一貫したプロフェッショナルな外観が保証されます。`,
+サイトは、すべてのデバイスで完全にレスポンシブな、クリーンでプロフェッショナルなデザインを特徴としています。検索エンジンの可視性を向上させるためのSEO最適化を実装し、潜在顧客とのコミュニケーションを促進するお問い合わせフォームを統合しました。`,
       },
       {
         id: '3',
-        title: 'Weather Dashboard',
-        description: '天気予報APIを活用したダッシュボード。美しいUIと直感的な操作性を追求したプロジェクト。',
+        title: '深層学習×絵画でモデルの精度向上実験',
+        description: '画像キャプショニングモデルをファインチューニングすることで、絵画ドメインに対して精度向上を目指した実験を行いました。',
         url: 'https://example.com',
-        technologies: ['Vue.js', 'Chart.js', 'OpenWeatherMap API', 'CSS3', 'PWA'],
+        technologies: ['Python', 'PyTorch', 'Transformers', 'Hugging Face', 'Jupyter Notebook'],
         features: [
-          'リアルタイム天気データ',
-          'インタラクティブな天気チャート',
-          '7日間の予報',
-          '位置ベースの天気情報',
-          'オフラインPWAサポート',
+          '画像キャプショニングモデルのファインチューニング',
+          '絵画ドメインデータセットの準備',
+          'モデル評価とメトリクス',
+          '転移学習技術',
+          'パフォーマンス最適化',
         ],
-        longDescription: `一目で包括的な天気情報を提供する、美しく直感的な天気ダッシュボード。アプリケーションはOpenWeatherMap APIを活用して、世界中の場所の正確なリアルタイム天気データを提供します。
+        longDescription: `この研究プロジェクトは、絵画ドメインに特化した画像キャプショニングモデルの精度向上に焦点を当てました。キュレーションされた絵画データセットで事前学習済みモデルをファインチューニングすることで、絵画やその他の芸術作品に対して正確で文脈的に適切なキャプションを生成するモデルの能力を向上させることを目指しました。
 
-ダッシュボードは、気温トレンド、降水予報、その他の気象データを視覚化するインタラクティブなチャートを特徴としています。ユーザーは異なる場所を簡単に切り替え、時間別の内訳を含む詳細な7日間予報を表示できます。
+実験には、専門的な絵画データセットの収集と前処理、転移学習技術を使用したTransformerベースのモデルのファインチューニング、そして様々なメトリクスを使用したパフォーマンス評価が含まれました。このプロジェクトは、専門的な用途のためにドメイン固有のファインチューニングがモデル精度を向上させる効果を実証しました。
 
-デザインは明確さと使いやすさを優先し、天気状況を一目で理解しやすいクリーンなインターフェースを提供します。アプリケーションはProgressive Web App（PWA）として構築されており、ユーザーがデバイスにインストールして、オフライン時でも天気情報にアクセスできるようにします。レスポンシブデザインにより、デスクトップ、タブレット、モバイルデバイス全体で最適な閲覧体験が保証されます。`,
+主な成果には、汎用の画像キャプショニングモデルを絵画ドメインに適応させることに成功し、改善された精度メトリクスを達成し、将来の参照のためにファインチューニングプロセスと結果を文書化することが含まれます。`,
       },
       {
         id: '4',
-        title: 'Art Gallery',
-        description: 'Three.jsを活用した3Dアートギャラリー。インタラクティブな体験を通じて作品を展示。',
+        title: '強化学習×ゲームでエージェントを作成',
+        description: '強化学習を用いて、ゲーム内のエージェントを作成し、最適な行動を学習させる実験を行いました。',
         url: 'https://example.com',
-        technologies: ['Three.js', 'React', 'WebGL', 'GSAP', 'Blender'],
+        technologies: ['Python', 'PyTorch', 'Gymnasium', 'Stable-Baselines3', 'NumPy'],
         features: [
-          '3D仮想ギャラリースペース',
-          'インタラクティブな作品探索',
-          'VR/AR互換性',
-          '動的ライティング効果',
-          '作品詳細ビュー',
+          'RLエージェントの実装',
+          '環境のセットアップと設定',
+          'ポリシー最適化',
+          '報酬関数の設計',
+          '訓練と評価',
         ],
-        longDescription: `インタラクティブなWeb体験を通じて作品に命を吹き込む、没入型の3D仮想アートギャラリー。Three.jsとWebGLで構築されたこのプロジェクトは、ユーザーがブラウザから探索できる写実的なギャラリー環境を作成します。
+        longDescription: `このプロジェクトは、強化学習技術を使用してインテリジェントなゲームエージェントを作成することを含みました。目標は、ゲーム環境との相互作用を通じて最適な戦略を学習できるエージェントを訓練し、複雑な意思決定問題を解決する際のRLの力を実証することでした。
 
-ギャラリーは、リアルなライティングとマテリアルを備えた慎重に設計された3Dスペースを特徴とし、本物の博物館のような雰囲気を作り出します。ユーザーは直感的なコントロールを使用してギャラリーをナビゲートし、作品にズームインして細部を表示し、各作品に関する追加情報にアクセスできます。
+実装には、Gymnasiumを使用したゲーム環境のセットアップ、PPOやDQNなどの様々なRLアルゴリズムの実装、そして高性能を達成するためのエージェントの訓練が含まれました。このプロジェクトは、異なる報酬関数と訓練戦略を探索してエージェントの行動を最適化しました。
 
-プロジェクトは、カスタムシェーダー、ポストプロセシング効果、最適化されたレンダリングパイプラインを含む、高度な3D Web開発技術を示しています。ギャラリーは異なるデバイス間でアクセス可能になるように設計されており、パフォーマンス最適化により、低スペックのハードウェアでもスムーズな体験を保証します。将来の計画には、さらに没入感のある閲覧体験を作成するためのVR/ARサポートが含まれます。`,
+主な成果には、ベースライン戦略を上回るエージェントの訓練に成功し、異なるRLアルゴリズム間のトレードオフを理解し、強化学習システムの実装と調整における実践的な経験を得ることが含まれます。このプロジェクトは、ゲーム環境にRLを適用する際の課題と機会についての貴重な洞察を提供しました。`,
       },
     ],
     blogPosts: [
