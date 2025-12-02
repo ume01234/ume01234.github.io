@@ -346,10 +346,12 @@ The project was executed on Google Colab.`,
         'Logglass（エンジニア）2025年9月',
       ],
       events: [
-        '東京大学松尾・岩澤研究室 GCI Winter 修了',
-        '同上主催 深層学習基礎講座 修了',
+        '東京大学松尾・岩澤研究室 GCI2025 Summer 修了',
+        '同上主催 深層学習基礎講座2025 Autumn 修了',
         '同上主催 E資格対策講座 受講中',
         'Track Job Hackathon 2025年5月参加',
+        'セキュリティミニキャンプ 山梨 修了',
+        'セキュリティミニキャンプ オンライン 参加'
       ],
     },
     works: [
